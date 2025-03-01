@@ -1,0 +1,55 @@
+---
+title: "Indonesia_MPA_Analysis"
+author: "Sameer, Andrew, Kayla"
+date: '2025-03-01'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#Importing libraries for Shiny dashboard and documentation
+library(tidyverse)
+library(rlang)
+library(roxygen2)
+library(gridExtra)
+```
+
+```{r}
+#Load dataset from an RDS file named "optdata.rds"
+settlement_data <- read_csv("Settlement_Data_with_updated_demographics.csv")
+
+head(settlement_data)
+```
+```{r}
+#Rename columns
+settlement_data <- settlement_data %>%
+                  rename(`Household Material Assets` = MAIndex, `Household Marine Tenure` = MTIndex, 
+                         `Food Security Index` = FSIndex, `Place Attachment Index` = PAIndex,
+                          `School Enrollment Rate` = SERate)
+head(settlement_data)
+```
+```{r}
+#Round values to 2 decimal place
+settlement_data <- settlement_data %>% 
+                  mutate(`Household Material Assets` = round(`Household Material Assets`, 2)) %>%
+                  mutate(`Household Marine Tenure` = round(`Household Marine Tenure`, 2)) %>%
+                  mutate(`Food Security Index` = round(`Food Security Index`, 2)) %>%
+                  mutate(`Place Attachment Index` = round(`Place Attachment Index`, 2)) %>%
+                  mutate(`School Enrollment Rate` = round(`School Enrollment Rate`, 2)) %>%
+                  mutate(`YrResident` = round(`YrResident`, 2)) %>%
+                  mutate(`Age`= round(`Age`, 2)) %>%
+                  mutate(`Gender` = round(`Gender`, 2))
+#Look at summary
+summary(settlement_data)
+```
+
+```{r}
+#Remove NAs
+settlement_data <- na.omit(settlement_data)
+```
+
+
+
