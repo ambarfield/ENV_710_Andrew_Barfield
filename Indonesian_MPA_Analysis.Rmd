@@ -15,6 +15,7 @@ library(tidyverse)
 library(rlang)
 library(roxygen2)
 library(gridExtra)
+library(here)
 ```
 
 ```{r}
@@ -68,4 +69,23 @@ histogram_1 <- ggplot(settlement_data, aes(x = `Food Security Index`,
 histogram_1
 ```
 
+```{r}
+# Graph 2
+# A scatterplot depicting the relationship between the food security 
+# and place attachment indices
+fs_pa_scatterplot <- ggplot(settlement_data, aes(x = `Food Security Index`,
+                            y = `Place Attachment Index`)) +
+  geom_point(aes(color = MPAName)) +
+  geom_smooth(method = "lm", color = "black") +
+  labs(x = "Food Security Index",
+       y = "Place Attachment Index",
+       color = "MPA Name") +
+  ggtitle("Relationship Between Food Security and Place Attachment in Indonesia") +
+  theme_bw() +
+  theme(legend.position = "bottom",
+        legend.background = element_rect(color = "black"))
+
+# View scatterplot
+fs_pa_scatterplot
+```
 
