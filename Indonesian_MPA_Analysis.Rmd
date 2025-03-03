@@ -63,10 +63,14 @@ histogram_1 <- ggplot(settlement_data, aes(x = `Food Security Index`,
        y = "Count") +
   facet_wrap(~MPAName, nrow = 2)+
   theme_bw() +
-  theme(legend.position = "none")
+  theme(legend.position = "none") 
 
 # view histogram 
 histogram_1
+
+# save histogram to files 
+ggsave("BarfieldAEmersonKSwarupSFig1.jpg", plot = histogram_1)
+
 ```
 
 ```{r}
@@ -87,5 +91,8 @@ fs_pa_scatterplot <- ggplot(settlement_data, aes(x = `Food Security Index`,
 
 # View scatterplot
 fs_pa_scatterplot
+
+# save scatterplot to files 
+ggsave("BarfieldAEmersonKSwarupSFig2.jpg", plot = fs_pa_scatterplot )
 ```
 
