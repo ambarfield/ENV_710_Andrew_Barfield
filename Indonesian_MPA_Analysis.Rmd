@@ -9,6 +9,7 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Setup
 ```{r}
 #Importing libraries for Shiny dashboard and documentation
 library(tidyverse)
@@ -16,8 +17,11 @@ library(rlang)
 library(roxygen2)
 library(gridExtra)
 library(here)
+library(moments)
+library(dunn.test)
 ```
 
+# Load and Clean Data
 ```{r}
 #Load dataset from an RDS file named "optdata.rds"
 settlement_data <- read_csv("Settlement_Data_with_updated_demographics.csv")
@@ -28,7 +32,7 @@ head(settlement_data)
 #Rename columns
 settlement_data <- settlement_data %>%
                   rename(`Household Material Assets` = MAIndex, `Household Marine Tenure` = MTIndex, 
-                         `Food Security Index` = FSIndex, `Place Attachment Index` = PAIndex,
+                         `Food Security Index` = FSIndex, `Place_Attachment_Index` = PAIndex,
                           `School Enrollment Rate` = SERate)
 head(settlement_data)
 ```
@@ -38,7 +42,7 @@ settlement_data <- settlement_data %>%
                   mutate(`Household Material Assets` = round(`Household Material Assets`, 2)) %>%
                   mutate(`Household Marine Tenure` = round(`Household Marine Tenure`, 2)) %>%
                   mutate(`Food Security Index` = round(`Food Security Index`, 2)) %>%
-                  mutate(`Place Attachment Index` = round(`Place Attachment Index`, 2)) %>%
+                  mutate(`Place_Attachment_Index` = round(`Place_Attachment_Index`, 2)) %>%
                   mutate(`School Enrollment Rate` = round(`School Enrollment Rate`, 2)) %>%
                   mutate(`YrResident` = round(`YrResident`, 2)) %>%
                   mutate(`Age`= round(`Age`, 2)) %>%
@@ -52,7 +56,7 @@ summary(settlement_data)
 settlement_data <- na.omit(settlement_data)
 ```
 
-
+# Figure 1
 ```{r}
 # Graph 1
 # visualize the distribution of the food security index observations by MPA 
@@ -73,14 +77,16 @@ ggsave("BarfieldAEmersonKSwarupSFig1.jpg", plot = histogram_1)
 
 ```
 
-```{r}
+# Figure 2
+```{r, fig.cap="A series of histograms depicting the relationship between food security and place attachment within specific marine protected area (MPA) regions in Indonesia. Both indices are scaled 1-5."}
 # Graph 2
 # A scatterplot depicting the relationship between the food security 
 # and place attachment indices
 fs_pa_scatterplot <- ggplot(settlement_data, aes(x = `Food Security Index`,
-                            y = `Place Attachment Index`)) +
-  geom_point(aes(color = MPAName)) +
+                            y = `Place_Attachment_Index`)) +
+  geom_point(aes(colour = MPAName)) +
   geom_smooth(method = "lm", color = "black") +
+  facet_grid(~MPAName) +
   labs(x = "Food Security Index",
        y = "Place Attachment Index",
        color = "MPA Name") +
@@ -95,4 +101,101 @@ fs_pa_scatterplot
 # save scatterplot to files 
 ggsave("BarfieldAEmersonKSwarupSFig2.jpg", plot = fs_pa_scatterplot )
 ```
+
+# Andrew Linear Regression Model
+```{r}
+# Define Research Question:
+# Is there a relationship between place attachment index and gender, 
+# age, and years of residency in Indonesian households?
+
+# Examine data and possible correlations
+# Raw Counts
+ggplot(data = settlement_data, aes(x = `Place_Attachment_Index`)) +
+  geom_bar() +
+  labs(y = "Count") +
+  theme_bw()
+
+ggplot(data = settlement_data, aes(x = Age)) +
+  geom_histogram() +
+  labs(y = "Count") +
+  theme_bw()
+
+ggplot(data = settlement_data, aes(x = Gender)) +
+  geom_bar() +
+  labs(y = "Count") +
+  theme_bw()
+
+ggplot(data = settlement_data, aes(x = YrResident)) +
+  geom_histogram() +
+  labs(y = "Count") +
+  theme_bw()
+
+# Possible Correlations
+ggplot(data = settlement_data, aes(x = Age, y = `Place_Attachment_Index`)) +
+  geom_point() +
+  theme_bw()
+
+ggplot(data = settlement_data, aes(x = Gender, y = `Place_Attachment_Index`)) +
+  geom_point() +
+  theme_bw()
+
+ggplot(data = settlement_data, aes(x = YrResident, y = `Place_Attachment_Index`)) +
+  geom_point() +
+  theme_bw()
+
+# Multi-collinearity tests
+cor.test(settlement_data$Age, settlement_data$Gender)
+cor.test(settlement_data$Age, settlement_data$YrResident)
+cor.test(settlement_data$Gender, settlement_data$YrResident)
+
+# Fit regression model
+Indonesia_individual_model <- lm(Place_Attachment_Index ~ YrResident +
+                                   Age + Gender, data = settlement_data)
+
+summary(Indonesia_individual_model)
+
+# Evaluate Model Diagnostics
+plot(Indonesia_individual_model)
+
+# Communicate Results
+# The results of our multiple linear regression reveal that age, gender, and
+# years of residency are not significant predictors of place attachment in 
+# Indonesia (F(410) = 2.195, adjusted R^2 = 0.009, p = 0.09). 
+
+```
+
+# Andrew Kruskal Wallis and Dunn's Test
+```{r}
+# Null Hypothesis: Place attachment between all MPAs are the same.
+
+# Alternative Hypothesis: Place attachment between at least two 
+# MPAs are different. 
+
+# Examining Data Distributions
+ggplot(settlement_data, aes(x = Place_Attachment_Index,
+                            fill = MPAName)) +
+  geom_histogram() +
+  facet_grid(.~MPAName) +
+  labs(x = "Place Attachment Index",
+       y = "Count") +
+  theme_bw() +
+  theme(legend.position = "bottom")
+
+# Use Q-Q Plots, skewness, and kurtosis to test for normality
+ggplot(settlement_data, aes(sample = Place_Attachment_Index)) +
+  geom_qq() +
+  geom_qq_line() +
+  labs (x = "Theoretical Normal Distribution",
+        y = "Raw Place Attachment Index Values")
+
+skewness(settlement_data$Place_Attachment_Index)
+kurtosis(settlement_data$Place_Attachment_Index)
+
+# Non-normal data, so we will use Kruskal-Wallis and Dunn's post-hoc tests
+Indonesia_individual_kruskal_test <- 
+  kruskal.test(Place_Attachment_Index ~ MPAName, data = settlement_data)
+summary(Indonesia_individual_kruskal_test)
+
+```
+
 
