@@ -28,6 +28,7 @@ settlement_data <- read_csv("Settlement_Data_with_updated_demographics.csv")
 
 head(settlement_data)
 ```
+
 ```{r}
 #Rename columns
 settlement_data <- settlement_data %>%
@@ -36,6 +37,7 @@ settlement_data <- settlement_data %>%
                           `School Enrollment Rate` = SERate)
 head(settlement_data)
 ```
+
 ```{r}
 #Round values to 2 decimal place
 settlement_data <- settlement_data %>% 
@@ -198,4 +200,48 @@ summary(Indonesia_individual_kruskal_test)
 
 ```
 
+
+```{r}
+#Sameer's Logistics Regression Model for determining Place Attachment
+
+#Define a function for Rice's Rule
+rice_rule <- function(n) {
+  return(2 * (n^(1/3)))
+}
+```
+
+```{r}
+num_bins <- ceiling(rice_rule(length(settlement_data$Place_Attachment_Index)))
+
+#Look at distribution of place attachment values
+ggplot(settlement_data, aes(x = Place_Attachment_Index)) +
+      geom_histogram(bins = num_bins) +
+      labs(x = "Place Attachment", y = "Frequency", title = "Distribution of Place Attachment values amongst Eastern Indonesian communities") +
+      theme_bw()
+
+#Distribution is approximately normal with a slight right-skew
+```
+
+```{r}
+mean_PIA <- mean(settlement_data$Place_Attachment_Index)
+
+#As an initial pass, convert Place_Attachment_Index into a binary categorical variable where values below mean are 0 and values above mean are 1. This categorization can be further explored and tweaked
+settlement_data <- settlement_data %>% 
+                    mutate(PIA_Binary = ifelse(Place_Attachment_Index > mean_PIA, 1, 0))
+```
+
+```{r}
+#Data visualizations to examine significance of relation between covariates and response variable
+
+#Examining correlation between response variables
+```
+
+
+```{r}
+#Build first logistic regression model with PIA_Binary as response variable
+PIA_glm <- glm(PIA_Binary ~ `Household Material Assets` + `Household Marine Tenure` + `Food Security Index` + `School Enrollment Rate`, data = settlement_data)
+
+#As an initial pass, Household Material Assets is a significant predictor (p < 0.05) of PIA_Binary
+summary(PIA_glm)
+```
 
