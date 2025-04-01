@@ -245,3 +245,109 @@ PIA_glm <- glm(PIA_Binary ~ `Household Material Assets` + `Household Marine Tenu
 summary(PIA_glm)
 ```
 
+
+
+# Kayla's Linear Regression Model
+```{r}
+# Define Research Question:
+# Is there a relationship between place attachment index and household material assets, 
+# household marine tenure, and school enrollment rate?
+
+# Examine data and possible correlations
+# Raw Counts
+ggplot(data = settlement_data, aes(x = `Place_Attachment_Index`)) +
+  geom_histogram(bins = 15) +
+  theme_bw()
+# pretty normally distributed 
+
+ggplot(data = settlement_data, aes(x = `Household Material Assets`)) +
+  geom_histogram(bins = 15) +
+  theme_bw()
+# pretty normally distributed 
+
+ggplot(data = settlement_data, aes(x = `Household Marine Tenure`)) +
+  geom_histogram(bins = 15) +
+  theme_bw()
+# not normally distributed
+
+ggplot(data = settlement_data, aes(x = `School Enrollment Rate`)) +
+  geom_histogram(bins = 15) +
+  theme_bw()
+# pretty skewed
+
+# Possible Correlations
+ggplot(data = settlement_data, aes(x = `Household Material Assets`, y = `Place_Attachment_Index`)) +
+  geom_point() +
+  theme_bw()
+
+ggplot(data = settlement_data, aes(x = `Household Marine Tenure`, y = `Place_Attachment_Index`)) +
+  geom_point() +
+  theme_bw()
+
+ggplot(data = settlement_data, aes(x = `School Enrollment Rate`, y = `Place_Attachment_Index`)) +
+  geom_point() +
+  theme_bw()
+
+#unclear if any of those have any sort of correlation
+
+# Numerically view correlation 
+cor.test(settlement_data$Place_Attachment_Index, settlement_data$`Household Material Assets`)
+# very low.... -0.06
+cor.test(settlement_data$Place_Attachment_Index, settlement_data$`Household Marine Tenure`)
+# slightly better .. 0.158
+cor.test(settlement_data$Place_Attachment_Index, settlement_data$`School Enrollment Rate`)
+# still low ... -0.135
+
+# Multi-collinearity tests
+cor.test(settlement_data$`Household Material Assets`, settlement_data$`Household Marine Tenure`)
+# pass
+cor.test(settlement_data$`Household Material Assets`, settlement_data$`School Enrollment Rate`)
+# pass
+cor.test(settlement_data$`Household Marine Tenure`, settlement_data$`School Enrollment Rate`)
+# pass 
+
+# ok so no strong correlations, not worried about co-linearity either 
+# try to fit model and see what happens 
+
+# Fit regression model
+Indonesia_household_model <- lm(Place_Attachment_Index ~ `Household Material Assets` +
+                                   `Household Marine Tenure` + `School Enrollment Rate`, 
+                                data = settlement_data)
+
+summary(Indonesia_household_model)
+
+# Evaluate Model Diagnostics
+plot(Indonesia_household_model)
+# plots look fine, no outliers 
+
+# Communicate Results
+# The results of our multiple linear regression reveal that household marine tenure, 
+# and school enrollment rate are significant predictors of place attachment in 
+# Indonesia (F(407) = 5.403, adjusted R^2 = 0.03121, p = 0.0012). 
+
+# household material assets t = 0.496
+# household marine tenure t = 0.005 **
+# school enrollment rate t  = 0.0378 *
+
+
+# This model is weak, let's see what it looks like without household material assets
+# Fit regression model
+Indonesia_household_model2 <- lm(Place_Attachment_Index ~ `Household Marine Tenure`
+                                 + `School Enrollment Rate`, 
+                                data = settlement_data)
+
+summary(Indonesia_household_model2)
+
+# Evaluate Model Diagnostics
+plot(Indonesia_household_model2)
+# plots look fine
+
+# The results of our multiple linear regression reveal that household marine tenure, 
+# and school enrollment rate are significant predictors of place attachment in 
+# Indonesia (F(408) = 7.882, adjusted R^2 = 0.03248, p = 0.0004). 
+# household marine tenure t = 0.00468 **
+# school enrollment rate t  = 0.0242 *
+
+# better, but not sure what this tells us. maybe we try a multilevel model. 
+
+```
