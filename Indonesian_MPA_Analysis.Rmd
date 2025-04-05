@@ -19,9 +19,10 @@ library(gridExtra)
 library(here)
 library(moments)
 library(dunn.test)
+library(nlme)
 ```
 
-# Load and Clean Data
+# Load and Clean Data (Sameer)
 ```{r}
 #Load dataset from an RDS file named "optdata.rds"
 settlement_data <- read_csv("Settlement_Data_with_updated_demographics.csv")
@@ -32,20 +33,20 @@ head(settlement_data)
 ```{r}
 #Rename columns
 settlement_data <- settlement_data %>%
-                  rename(`Household Material Assets` = MAIndex, `Household Marine Tenure` = MTIndex, 
-                         `Food Security Index` = FSIndex, `Place_Attachment_Index` = PAIndex,
-                          `School Enrollment Rate` = SERate)
+                  rename(`Household_Material_Assets` = MAIndex, `Household_Marine_Tenure` = MTIndex, 
+                         `Food_Security_Index` = FSIndex, `Place_Attachment_Index` = PAIndex,
+                          `School_Enrollment_Rate` = SERate)
 head(settlement_data)
 ```
 
 ```{r}
 #Round values to 2 decimal place
 settlement_data <- settlement_data %>% 
-                  mutate(`Household Material Assets` = round(`Household Material Assets`, 2)) %>%
-                  mutate(`Household Marine Tenure` = round(`Household Marine Tenure`, 2)) %>%
-                  mutate(`Food Security Index` = round(`Food Security Index`, 2)) %>%
+                  mutate(`Household_Material_Assets` = round(`Household_Material_Assets`, 2)) %>%
+                  mutate(`Household_Marine_Tenure` = round(`Household_Marine_Tenure`, 2)) %>%
+                  mutate(`Food_Security_Index` = round(`Food_Security_Index`, 2)) %>%
                   mutate(`Place_Attachment_Index` = round(`Place_Attachment_Index`, 2)) %>%
-                  mutate(`School Enrollment Rate` = round(`School Enrollment Rate`, 2)) %>%
+                  mutate(`School_Enrollment_Rate` = round(`School_Enrollment_Rate`, 2)) %>%
                   mutate(`YrResident` = round(`YrResident`, 2)) %>%
                   mutate(`Age`= round(`Age`, 2)) %>%
                   mutate(`Gender` = round(`Gender`, 2))
@@ -58,11 +59,11 @@ summary(settlement_data)
 settlement_data <- na.omit(settlement_data)
 ```
 
-# Figure 1
+# Figure 1 (Kayla)
 ```{r}
 # Graph 1
 # visualize the distribution of the food security index observations by MPA 
-histogram_1 <- ggplot(settlement_data, aes(x = `Food Security Index`,
+histogram_1 <- ggplot(settlement_data, aes(x = Food_Security_Index,
                                            fill = MPAName)) +
   geom_histogram(bins = 6, binwidth = 0.5) +  # follow rice's rule to get 6ish
   labs(x = "Food Security Index", 
@@ -79,13 +80,13 @@ ggsave("BarfieldAEmersonKSwarupSFig1.jpg", plot = histogram_1)
 
 ```
 
-# Figure 2
+# Figure 2 (Andrew)
 ```{r, fig.cap="A series of histograms depicting the relationship between food security and place attachment within specific marine protected area (MPA) regions in Indonesia. Both indices are scaled 1-5."}
 # Graph 2
 # A scatterplot depicting the relationship between the food security 
 # and place attachment indices
-fs_pa_scatterplot <- ggplot(settlement_data, aes(x = `Food Security Index`,
-                            y = `Place_Attachment_Index`)) +
+fs_pa_scatterplot <- ggplot(settlement_data, aes(x = Food_Security_Index,
+                            y = Place_Attachment_Index)) +
   geom_point(aes(colour = MPAName)) +
   geom_smooth(method = "lm", color = "black") +
   facet_grid(~MPAName) +
@@ -95,16 +96,17 @@ fs_pa_scatterplot <- ggplot(settlement_data, aes(x = `Food Security Index`,
   ggtitle("Relationship Between Food Security and Place Attachment in Indonesia") +
   theme_bw() +
   theme(legend.position = "bottom",
-        legend.background = element_rect(color = "black"))
+        legend.background = element_rect(color = "black"),
+        strip.text.x = element_text(size = 7))
 
 # View scatterplot
 fs_pa_scatterplot
 
 # save scatterplot to files 
-ggsave("BarfieldAEmersonKSwarupSFig2.jpg", plot = fs_pa_scatterplot )
+ggsave("BarfieldAEmersonKSwarupSFig2.jpg", plot = fs_pa_scatterplot)
 ```
 
-# Andrew Linear Regression Model
+# Generalized Linear Regression Model (Andrew)
 ```{r}
 # Define Research Question:
 # Is there a relationship between place attachment index and gender, 
@@ -112,7 +114,7 @@ ggsave("BarfieldAEmersonKSwarupSFig2.jpg", plot = fs_pa_scatterplot )
 
 # Examine data and possible correlations
 # Raw Counts
-ggplot(data = settlement_data, aes(x = `Place_Attachment_Index`)) +
+ggplot(data = settlement_data, aes(x = Place_Attachment_Index)) +
   geom_bar() +
   labs(y = "Count") +
   theme_bw()
@@ -133,15 +135,15 @@ ggplot(data = settlement_data, aes(x = YrResident)) +
   theme_bw()
 
 # Possible Correlations
-ggplot(data = settlement_data, aes(x = Age, y = `Place_Attachment_Index`)) +
+ggplot(data = settlement_data, aes(x = Age, y = Place_Attachment_Index)) +
   geom_point() +
   theme_bw()
 
-ggplot(data = settlement_data, aes(x = Gender, y = `Place_Attachment_Index`)) +
+ggplot(data = settlement_data, aes(x = Gender, y = Place_Attachment_Index)) +
   geom_point() +
   theme_bw()
 
-ggplot(data = settlement_data, aes(x = YrResident, y = `Place_Attachment_Index`)) +
+ggplot(data = settlement_data, aes(x = YrResident, y = Place_Attachment_Index)) +
   geom_point() +
   theme_bw()
 
@@ -156,6 +158,9 @@ Indonesia_individual_model <- lm(Place_Attachment_Index ~ YrResident +
 
 summary(Indonesia_individual_model)
 
+# AIC Value of linear model
+AIC(Indonesia_individual_model)
+
 # Evaluate Model Diagnostics
 plot(Indonesia_individual_model)
 
@@ -166,7 +171,7 @@ plot(Indonesia_individual_model)
 
 ```
 
-# Andrew Kruskal Wallis and Dunn's Test
+# Kruskal Wallis and Dunn's Test 1 (Andrew)
 ```{r}
 # Null Hypothesis: Place attachment between all MPAs are the same.
 
@@ -179,9 +184,11 @@ ggplot(settlement_data, aes(x = Place_Attachment_Index,
   geom_histogram() +
   facet_grid(.~MPAName) +
   labs(x = "Place Attachment Index",
-       y = "Count") +
+       y = "Count",
+       color = "MPA Name") +
   theme_bw() +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom",
+        strip.text.x = element_text(size = 7))
 
 # Use Q-Q Plots, skewness, and kurtosis to test for normality
 ggplot(settlement_data, aes(sample = Place_Attachment_Index)) +
@@ -194,13 +201,175 @@ skewness(settlement_data$Place_Attachment_Index)
 kurtosis(settlement_data$Place_Attachment_Index)
 
 # Non-normal data, so we will use Kruskal-Wallis and Dunn's post-hoc tests
-Indonesia_individual_kruskal_test <- 
-  kruskal.test(Place_Attachment_Index ~ MPAName, data = settlement_data)
-summary(Indonesia_individual_kruskal_test)
+Indonesia_MPA_kruskal_test <- kruskal.test(Place_Attachment_Index ~ MPAName, 
+                                                  data = settlement_data)
+
+Indonesia_MPA_kruskal_test
+
+# Results of Kruskal Test are significant, so let's run a Dunn's Test
+Indonesia_MPA_dunn_test <- dunn.test(settlement_data$Place_Attachment_Index, settlement_data$MPAName)
 
 ```
 
+# Kruskal Wallis and Dunn's Test 2 (Andrew)
+```{r}
+# Null Hypothesis: Food security between all MPAs are the same.
 
+# Alternative Hypothesis: Food security between at least two 
+# MPAs are different. 
+
+# Examining Data Distributions
+ggplot(settlement_data, aes(x = Food_Security_Index,
+                            fill = MPAName)) +
+  geom_histogram() +
+  facet_grid(.~MPAName) +
+  labs(x = "Food Security Index",
+       y = "Count",
+       color = "MPA Name") +
+  theme_bw() +
+  theme(legend.position = "bottom",
+        strip.text.x = element_text(size = 7))
+
+# Use Q-Q Plots, skewness, and kurtosis to test for normality
+ggplot(settlement_data, aes(sample = Food_Security_Index)) +
+  geom_qq() +
+  geom_qq_line() +
+  labs (x = "Theoretical Normal Distribution",
+        y = "Raw Food Security Index Values")
+
+skewness(settlement_data$Food_Security_Index)
+kurtosis(settlement_data$Food_Security_Index)
+
+# Non-normal data, so we will use Kruskal-Wallis and Dunn's post-hoc tests
+Indonesia_MPA_kruskal_test2 <- kruskal.test(Food_Security_Index ~ MPAName, 
+                                                  data = settlement_data)
+
+Indonesia_MPA_kruskal_test2
+
+# Results of Kruskal Test are significant, so let's run a Dunn's Test
+Indonesia_MPA_dunn_test2 <- dunn.test(settlement_data$Food_Security_Index, settlement_data$MPAName)
+
+```
+
+# Multi-level Regression Model (Andrew)
+```{r}
+# Make MPA names into a factor with 6 levels
+settlement_data2 <- settlement_data %>% 
+  mutate(MPAName = factor(MPAName, levels = c("Kaimana MPA",
+                                              "Kofiau dan Pulau Boo MPA",
+                                              "Misool Selatan Timur MPA",
+                                              "Selat Dampier MPA",
+                                              "Teluk Cenderawasih NP",
+                                              "Teluk Mayalibit MPA")))
+
+# Define Research Question:
+# Do marine tenure, food security index, years of residency, and age
+# significantly predict place attachment index in Indonesian households?
+
+# Examine data and possible correlations
+# Raw counts
+ggplot(data = settlement_data2, aes(x = Household_Marine_Tenure)) +
+  geom_histogram() +
+  labs(y = "Count") +
+  theme_bw()
+
+ggplot(data = settlement_data2, aes(x = Food_Security_Index)) +
+  geom_histogram() +
+  labs(y = "Count") +
+  theme_bw()
+
+ggplot(data = settlement_data2, aes(x = YrResident)) +
+  geom_histogram() +
+  labs(y = "Count") +
+  theme_bw()
+
+ggplot(data = settlement_data2, aes(x = Age)) +
+  geom_histogram() +
+  labs(y = "Count") +
+  theme_bw()
+
+ggplot(data = settlement_data2, aes(x = Place_Attachment_Index)) +
+  geom_bar() +
+  labs(y = "Count") +
+  theme_bw()
+
+# Possible Correlations
+ggplot(data = settlement_data2, aes(x = Household_Marine_Tenure, 
+                                    y = Place_Attachment_Index)) +
+  geom_point() +
+  theme_bw()
+
+ggplot(data = settlement_data, aes(x = Food_Security_Index, 
+                                   y = Place_Attachment_Index)) +
+  geom_point() +
+  theme_bw()
+
+ggplot(data = settlement_data, aes(x = YrResident, 
+                                   y = Place_Attachment_Index)) +
+  geom_point() +
+  theme_bw()
+
+ggplot(data = settlement_data, aes(x = Age, y = Place_Attachment_Index)) +
+  geom_point() +
+  theme_bw()
+
+# Multi-collinearity tests
+cor.test(settlement_data2$Household_Marine_Tenure,
+         settlement_data2$Food_Security_Index)
+cor.test(settlement_data2$Household_Marine_Tenure,
+         settlement_data2$YrResident)
+cor.test(settlement_data2$Household_Marine_Tenure,
+         settlement_data2$Age)
+cor.test(settlement_data2$Food_Security_Index,
+         settlement_data2$YrResident)
+cor.test(settlement_data2$Food_Security_Index,
+         settlement_data2$Age)
+cor.test(settlement_data2$YrResident,
+         settlement_data2$Age)
+
+# Fit linear regression model without random effect and evaluate model
+# diagnostics
+place_attachment_lm <- lm(Place_Attachment_Index ~ 
+                            Household_Marine_Tenure +
+                            Food_Security_Index +
+                            YrResident +
+                            Age, data = settlement_data2)
+
+summary(place_attachment_lm)
+
+plot(place_attachment_lm)
+
+# AIC Value of standard linear model
+AIC(place_attachment_lm)
+
+# Fit linear regression model with random effect and evaluate model
+# diagnostics
+
+# Re-fit standard linear regression
+place_attachment_lm2 <- gls(Place_Attachment_Index ~ 
+                            Household_Marine_Tenure +
+                            Food_Security_Index +
+                            YrResident +
+                            Age, data = settlement_data2)
+# Fit multi-level model with random intercept by plot
+place_attachment_rlm <- lme(Place_Attachment_Index ~ 
+                            Household_Marine_Tenure +
+                            Food_Security_Index +
+                            YrResident +
+                            Age, random = ~ 1 | MPAName, data = settlement_data2)
+
+# Compare AIC Values
+AIC(place_attachment_lm2, place_attachment_rlm)
+
+# Plot residuals of multi-level model
+plot(place_attachment_rlm)
+qqnorm(place_attachment_rlm)
+
+# Model summary
+summary(place_attachment_rlm)
+```
+
+# Logsitic Regression Model (Sameer)
 ```{r}
 #Sameer's Logistics Regression Model for determining Place Attachment
 
@@ -245,9 +414,7 @@ PIA_glm <- glm(PIA_Binary ~ `Household Material Assets` + `Household Marine Tenu
 summary(PIA_glm)
 ```
 
-
-
-# Kayla's Linear Regression Model
+# Linear Regression Model (Kayla)
 ```{r}
 # Define Research Question:
 # Is there a relationship between place attachment index and household material assets, 
