@@ -106,6 +106,21 @@ fs_pa_scatterplot
 ggsave("BarfieldAEmersonKSwarupSFig2.jpg", plot = fs_pa_scatterplot)
 ```
 
+# Figure 3 (Sameer)
+```{r}
+#Household Marine Tenure is defined as the average number of rights a household has over marine resources in their MPA
+#Potential for this to be a strong predictor of Place Attachment Index
+
+#Draw a scatterplot with a regression line to examine correlation
+ggplot(settlement_data, aes(x = Household_Marine_Tenure, y = Place_Attachment_Index)) +
+  geom_point() +
+  geom_smooth(method = "lm", col = "red") +
+  labs(x = "Household Marine Tenure",
+       y = "Place Attachment Index") +
+  ggtitle("Relationship of Place Attachment to Indonesian MPAs against Household Rights over Marine Resources")
+```
+
+
 # Generalized Linear Regression Model (Andrew)
 ```{r}
 # Define Research Question:
@@ -369,7 +384,7 @@ qqnorm(place_attachment_rlm)
 summary(place_attachment_rlm)
 ```
 
-# Logsitic Regression Model (Sameer)
+# Logistic Regression Model (Sameer)
 ```{r}
 #Sameer's Logistics Regression Model for determining Place Attachment
 
