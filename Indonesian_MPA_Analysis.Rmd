@@ -124,6 +124,7 @@ mt_pa_scatterplot
 # save scatterplot to files 
 ggsave("BarfieldAEmersonKSwarupSFig3.jpg", plot = mt_pa_scatterplot)
 ```
+
 Figure 4 (Sameer)
 ```{r, fig.cap="A series of scatterplots depicting the relationship between household marine tenure and place attachment within specific marine protected area (MPA) regions in Indonesia. Both indices are scaled 1-5."}
 #Homoscedastic distribution of Place Attachment Index values when plotted against Household Marine Tenure in Figure 3
@@ -145,9 +146,56 @@ mt_pa_all_mpas_scatterplot <- ggplot(settlement_data, aes(x = Household_Marine_T
 
 #View scatterplot
 mt_pa_all_mpas_scatterplot
+
+# save scatterplot to files 
+ggsave("BarfieldAEmersonKSwarupSFig4.jpg", plot = mt_pa_all_mpas_scatterplot)
+```
+
+# Figure 5 (Sameer)
+```{r, fig.cap="A scatterplot depicting the relationship between household material assets and place attachment over all marine protected areas (MPAs) in Bird's Head Seascape, Indonesia."}
+#Household Material Assets is defined as the economic well-being of a household
+#Potential for this to be a strong predictor of Place Attachment Index
+
+#Draw a scatterplot with a regression line to examine correlation
+ma_pa_scatterplot <- ggplot(settlement_data, aes(x = Household_Material_Assets, y = Place_Attachment_Index)) +
+  geom_point() +
+  geom_smooth(method = "lm", col = "red") +
+  labs(x = "Household Material Assets",
+       y = "Place Attachment Index") +
+  ggtitle("Relationship of Place Attachment to Bird's Head Seascape MPAs against Household Material Assets")
+
+ma_pa_scatterplot
+
+# save scatterplot to files 
+ggsave("BarfieldAEmersonKSwarupSFig5.jpg", plot = ma_pa_scatterplot)
 ```
 
 
+Figure 6 (Sameer)
+```{r, fig.cap="A series of scatterplots depicting the relationship between household material assets and place attachment within specific marine protected area (MPA) regions in Indonesia."}
+#Homoscedastic distribution of Place Attachment Index values when plotted against Household Material Assets in Figure 5
+
+#Will examine scatterplot of Place Attachment Index against Household Material Assets for the various MPAs
+ma_pa_all_mpas_scatterplot <- ggplot(settlement_data, aes(x = Household_Material_Assets,
+                            y = Place_Attachment_Index)) +
+  geom_point(aes(colour = MPAName)) +
+  geom_smooth(method = "lm", color = "black") +
+  facet_grid(~MPAName) +
+  labs(x = "Household Material Assets",
+       y = "Place Attachment Index",
+       color = "MPA Name") +
+  ggtitle("Relationship Between Household Material Assets and Place Attachment to MPAs in Bird's Head Seascape, Indonesia") +
+  theme_bw() +
+  theme(legend.position = "bottom",
+        legend.background = element_rect(color = "black"),
+        strip.text.x = element_text(size = 7))
+
+#View scatterplot
+ma_pa_all_mpas_scatterplot
+
+# save scatterplot to files 
+ggsave("BarfieldAEmersonKSwarupSFig6.jpg", plot = ma_pa_all_mpas_scatterplot)
+```
 
 # Generalized Linear Regression Model (Andrew)
 ```{r}
