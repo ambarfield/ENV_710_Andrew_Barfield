@@ -495,6 +495,7 @@ settlement_data <- settlement_data %>%
 PIA_glm <- glm(PIA_Binary ~  Household_Material_Assets + Household_Marine_Tenure + Food_Security_Index + School_Enrollment_Rate, data = settlement_data)
 
 #As an initial pass, Household Material Assets is a significant predictor (p < 0.05) of PIA_Binary
+#Interesting as Household Material Assets did not show a strong correlation with overall Place Attachment but could based on Binary PIA values.
 summary(PIA_glm)
 ```
 
@@ -507,11 +508,17 @@ place_attachment_household_mlm <- lme(Place_Attachment_Index ~
                             School_Enrollment_Rate +
                             Food_Security_Index, random = ~ 1 | MPAName, data = settlement_data2, na.action = na.exclude)
 
+#Interesting to note that school enrollment rate seems to be the only significant predictor of place attachment (as a continuous variable)
 summary(place_attachment_household_mlm)
 
 # Compare AIC Values
 AIC(PIA_glm, place_attachment_household_mlm)
 ```
+
+```{r}
+#Perhaps one more multi-level model where Place Attachmnent Index is added as a binary variable (thresholding is determined by scatterplots with individual covariates)
+```
+
 
 
 # Linear Regression Model (Kayla)
