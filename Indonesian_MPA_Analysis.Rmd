@@ -491,19 +491,28 @@ settlement_data <- settlement_data %>%
 ```
 
 ```{r}
-#Data visualizations to examine significance of relation between covariates and response variable
-
-#Examining correlation between response variables
-```
-
-
-```{r}
 #Build first logistic regression model with PIA_Binary as response variable
-PIA_glm <- glm(PIA_Binary ~ `Household Material Assets` + `Household Marine Tenure` + `Food Security Index` + `School Enrollment Rate`, data = settlement_data)
+PIA_glm <- glm(PIA_Binary ~  Household_Material_Assets + Household_Marine_Tenure + Food_Security_Index + School_Enrollment_Rate, data = settlement_data)
 
 #As an initial pass, Household Material Assets is a significant predictor (p < 0.05) of PIA_Binary
 summary(PIA_glm)
 ```
+
+# Multi-level model with household variables (Sameer)
+```{r}
+# Fit multi-level model with random intercept by plot as a sensitivity analysis
+place_attachment_household_mlm <- lme(Place_Attachment_Index ~ 
+                            Household_Marine_Tenure +
+                            Household_Material_Assets +
+                            School_Enrollment_Rate +
+                            Food_Security_Index, random = ~ 1 | MPAName, data = settlement_data2, na.action = na.exclude)
+
+summary(place_attachment_household_mlm)
+
+# Compare AIC Values
+AIC(PIA_glm, place_attachment_household_mlm)
+```
+
 
 # Linear Regression Model (Kayla)
 ```{r}
