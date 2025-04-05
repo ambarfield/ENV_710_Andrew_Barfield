@@ -81,7 +81,7 @@ ggsave("BarfieldAEmersonKSwarupSFig1.jpg", plot = histogram_1)
 ```
 
 # Figure 2 (Andrew)
-```{r, fig.cap="A series of histograms depicting the relationship between food security and place attachment within specific marine protected area (MPA) regions in Indonesia. Both indices are scaled 1-5."}
+```{r, fig.cap="A series of scatterplots depicting the relationship between food security and place attachment within specific marine protected area (MPA) regions in Indonesia. Both indices are scaled 1-5."}
 # Graph 2
 # A scatterplot depicting the relationship between the food security 
 # and place attachment indices
@@ -107,18 +107,46 @@ ggsave("BarfieldAEmersonKSwarupSFig2.jpg", plot = fs_pa_scatterplot)
 ```
 
 # Figure 3 (Sameer)
-```{r}
+```{r, fig.cap="A scatterplot depicting the relationship between household marine tenure and place attachment over all marine protected areas (MPAs) in Bird's Head Seascape, Indonesia. Both indices are scaled 1-5."}
 #Household Marine Tenure is defined as the average number of rights a household has over marine resources in their MPA
 #Potential for this to be a strong predictor of Place Attachment Index
 
 #Draw a scatterplot with a regression line to examine correlation
-ggplot(settlement_data, aes(x = Household_Marine_Tenure, y = Place_Attachment_Index)) +
+mt_pa_scatterplot <- ggplot(settlement_data, aes(x = Household_Marine_Tenure, y = Place_Attachment_Index)) +
   geom_point() +
   geom_smooth(method = "lm", col = "red") +
   labs(x = "Household Marine Tenure",
        y = "Place Attachment Index") +
-  ggtitle("Relationship of Place Attachment to Indonesian MPAs against Household Rights over Marine Resources")
+  ggtitle("Relationship of Place Attachment to Bird's Head Seascape MPAs against Household Rights over Marine Resources")
+
+mt_pa_scatterplot
+
+# save scatterplot to files 
+ggsave("BarfieldAEmersonKSwarupSFig3.jpg", plot = mt_pa_scatterplot)
 ```
+Figure 4 (Sameer)
+```{r, fig.cap="A series of scatterplots depicting the relationship between household marine tenure and place attachment within specific marine protected area (MPA) regions in Indonesia. Both indices are scaled 1-5."}
+#Homoscedastic distribution of Place Attachment Index values when plotted against Household Marine Tenure in Figure 3
+
+#Will examine scatterplot of Place Attachment Index against Household Marine Tenure for the various MPAs
+mt_pa_all_mpas_scatterplot <- ggplot(settlement_data, aes(x = Household_Marine_Tenure,
+                            y = Place_Attachment_Index)) +
+  geom_point(aes(colour = MPAName)) +
+  geom_smooth(method = "lm", color = "black") +
+  facet_grid(~MPAName) +
+  labs(x = "Household Marine Tenure",
+       y = "Place Attachment Index",
+       color = "MPA Name") +
+  ggtitle("Relationship Between Household Marine Tenure and Place Attachment to MPAs in Bird's Head Seascape, Indonesia") +
+  theme_bw() +
+  theme(legend.position = "bottom",
+        legend.background = element_rect(color = "black"),
+        strip.text.x = element_text(size = 7))
+
+#View scatterplot
+mt_pa_all_mpas_scatterplot
+```
+
 
 
 # Generalized Linear Regression Model (Andrew)
