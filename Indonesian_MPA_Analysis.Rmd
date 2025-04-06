@@ -108,16 +108,19 @@ ggsave("BarfieldAEmersonKSwarupSFig2.jpg", plot = fs_pa_scatterplot)
 
 # Figure 3 (Sameer)
 ```{r, fig.cap="A scatterplot depicting the relationship between household marine tenure and place attachment over all marine protected areas (MPAs) in Bird's Head Seascape, Indonesia. Both indices are scaled 1-5."}
-#Household Marine Tenure is defined as the average number of rights a household has over marine resources in their MPA
+#Household Marine Tenure is defined as the average number of rights a household
+# has over marine resources in their MPA
 #Potential for this to be a strong predictor of Place Attachment Index
 
 #Draw a scatterplot with a regression line to examine correlation
-mt_pa_scatterplot <- ggplot(settlement_data, aes(x = Household_Marine_Tenure, y = Place_Attachment_Index)) +
+mt_pa_scatterplot <- ggplot(settlement_data, aes(x = Household_Marine_Tenure, 
+                                                 y = Place_Attachment_Index)) +
   geom_point() +
   geom_smooth(method = "lm", col = "red") +
   labs(x = "Household Marine Tenure",
        y = "Place Attachment Index") +
-  ggtitle("Relationship of Place Attachment to Bird's Head Seascape MPAs against Household Rights over Marine Resources")
+  ggtitle("Relationship of Place Attachment to Bird's Head Seascape MPAs against 
+          Household Rights over Marine Resources")
 
 mt_pa_scatterplot
 
@@ -127,9 +130,11 @@ ggsave("BarfieldAEmersonKSwarupSFig3.jpg", plot = mt_pa_scatterplot)
 
 Figure 4 (Sameer)
 ```{r, fig.cap="A series of scatterplots depicting the relationship between household marine tenure and place attachment within specific marine protected area (MPA) regions in Indonesia. Both indices are scaled 1-5."}
-#Homoscedastic distribution of Place Attachment Index values when plotted against Household Marine Tenure in Figure 3
+#Homoscedastic distribution of Place Attachment Index values when plotted against 
+# Household Marine Tenure in Figure 3
 
-#Will examine scatterplot of Place Attachment Index against Household Marine Tenure for the various MPAs
+#Will examine scatterplot of Place Attachment Index against Household Marine 
+#Tenure for the various MPAs
 mt_pa_all_mpas_scatterplot <- ggplot(settlement_data, aes(x = Household_Marine_Tenure,
                             y = Place_Attachment_Index)) +
   geom_point(aes(colour = MPAName)) +
@@ -138,7 +143,8 @@ mt_pa_all_mpas_scatterplot <- ggplot(settlement_data, aes(x = Household_Marine_T
   labs(x = "Household Marine Tenure",
        y = "Place Attachment Index",
        color = "MPA Name") +
-  ggtitle("Relationship Between Household Marine Tenure and Place Attachment to MPAs in Bird's Head Seascape, Indonesia") +
+  ggtitle("Relationship Between Household Marine Tenure and Place Attachment to
+          MPAs in Bird's Head Seascape, Indonesia") +
   theme_bw() +
   theme(legend.position = "bottom",
         legend.background = element_rect(color = "black"),
@@ -162,7 +168,8 @@ ma_pa_scatterplot <- ggplot(settlement_data, aes(x = Household_Material_Assets, 
   geom_smooth(method = "lm", col = "red") +
   labs(x = "Household Material Assets",
        y = "Place Attachment Index") +
-  ggtitle("Relationship of Place Attachment to Bird's Head Seascape MPAs against Household Material Assets")
+  ggtitle("Relationship of Place Attachment to Bird's Head Seascape MPAs against 
+          Household Material Assets")
 
 ma_pa_scatterplot
 
@@ -173,7 +180,8 @@ ggsave("BarfieldAEmersonKSwarupSFig5.jpg", plot = ma_pa_scatterplot)
 
 Figure 6 (Sameer)
 ```{r, fig.cap="A series of scatterplots depicting the relationship between household material assets and place attachment within specific marine protected area (MPA) regions in Indonesia."}
-#Homoscedastic distribution of Place Attachment Index values when plotted against Household Material Assets in Figure 5
+#Homoscedastic distribution of Place Attachment Index values when plotted against 
+# Household Material Assets in Figure 5
 
 #Will examine scatterplot of Place Attachment Index against Household Material Assets for the various MPAs
 ma_pa_all_mpas_scatterplot <- ggplot(settlement_data, aes(x = Household_Material_Assets,
@@ -184,7 +192,8 @@ ma_pa_all_mpas_scatterplot <- ggplot(settlement_data, aes(x = Household_Material
   labs(x = "Household Material Assets",
        y = "Place Attachment Index",
        color = "MPA Name") +
-  ggtitle("Relationship Between Household Material Assets and Place Attachment to MPAs in Bird's Head Seascape, Indonesia") +
+  ggtitle("Relationship Between Household Material Assets and Place Attachment 
+          to MPAs in Bird's Head Seascape, Indonesia") +
   theme_bw() +
   theme(legend.position = "bottom",
         legend.background = element_rect(color = "black"),
@@ -246,6 +255,7 @@ cor.test(settlement_data$Gender, settlement_data$YrResident)
 # Fit regression model
 Indonesia_individual_model <- lm(Place_Attachment_Index ~ YrResident +
                                    Age + Gender, data = settlement_data)
+
 
 summary(Indonesia_individual_model)
 
@@ -447,7 +457,8 @@ place_attachment_rlm <- lme(Place_Attachment_Index ~
                             Household_Marine_Tenure +
                             Food_Security_Index +
                             YrResident +
-                            Age, random = ~ 1 | MPAName, data = settlement_data2)
+                            Age, random = ~ 1 | MPAName, data = settlement_data2, 
+                            na.action=na.exclude)
 
 # Compare AIC Values
 AIC(place_attachment_lm2, place_attachment_rlm)
@@ -510,7 +521,8 @@ place_attachment_household_mlm <- lme(Place_Attachment_Index ~
 
 #Interesting to note that school enrollment rate seems to be the only significant predictor of place attachment (as a continuous variable)
 summary(place_attachment_household_mlm)
-
+plot(place_attachment_household_mlm)
+qqnorm(place_attachment_household_mlm)
 # Compare AIC Values
 AIC(PIA_glm, place_attachment_household_mlm)
 ```
@@ -529,17 +541,17 @@ AIC(PIA_glm, place_attachment_household_mlm)
 
 # Examine data and possible correlations
 # Raw Counts
-ggplot(data = settlement_data, aes(x = `Place_Attachment_Index`)) +
+ggplot(data = settlement_data2, aes(x = `Place_Attachment_Index`)) +
   geom_histogram(bins = 15) +
   theme_bw()
 # pretty normally distributed 
 
-ggplot(data = settlement_data, aes(x = `Household Material Assets`)) +
+ggplot(data = settlement_data2, aes(x = `Household_Material_Assets`)) +
   geom_histogram(bins = 15) +
   theme_bw()
 # pretty normally distributed 
 
-ggplot(data = settlement_data, aes(x = `Household Marine Tenure`)) +
+ggplot(data = settlement_data2, aes(x = `Household_Marine_Tenure`)) +
   geom_histogram(bins = 15) +
   theme_bw()
 # not normally distributed
@@ -625,3 +637,31 @@ plot(Indonesia_household_model2)
 # better, but not sure what this tells us. maybe we try a multilevel model. 
 
 ```
+
+Mixed Effects Model - Kayla 
+Trying a mixed effects model with different predictor variables. A mix of individual and 
+household variables to try and build a more significant model. 
+```{r}
+# Try a multilevel/mixed effects model using vars we know have a correlation
+# with place attachment 
+
+# Fit multi-level model with random intercept by plot
+place_attachment_mem <- lme(Place_Attachment_Index ~ 
+                            School_Enrollment_Rate +
+                              Household_Marine_Tenure +
+                              YrResident, 
+                            random = ~ 1 | MPAName, data = settlement_data2, 
+                            na.action=na.exclude)
+
+# Compare AIC Values between all mixed effect models so far
+AIC(place_attachment_mem, place_attachment_rlm2, place_attachment_household_mlm)
+# mlm has the lowest AIC, with the mem having second lowest
+
+# Plot residuals of multi-level model
+plot(place_attachment_mem)
+qqnorm(place_attachment_mem)
+
+# Model summary
+summary(place_attachment_mem)
+```
+
