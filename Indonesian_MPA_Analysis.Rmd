@@ -93,11 +93,13 @@ fs_pa_scatterplot <- ggplot(settlement_data, aes(x = Food_Security_Index,
   labs(x = "Food Security Index",
        y = "Place Attachment Index",
        color = "MPA Name") +
-  ggtitle("Relationship Between Food Security and Place Attachment in Indonesia") +
+  ggtitle("Relationship Between Household Food Security 
+and MPA Place Attachment within Indonesian") +
   theme_bw() +
   theme(legend.position = "bottom",
         legend.background = element_rect(color = "black"),
-        strip.text.x = element_text(size = 7))
+        strip.text.x = element_text(size = 7),
+        plot.title = element_text(hjust = 0.5))
 
 # View scatterplot
 fs_pa_scatterplot
@@ -663,5 +665,33 @@ qqnorm(place_attachment_mem)
 
 # Model summary
 summary(place_attachment_mem)
+```
+
+# Descriptive Statistics (Andrew)
+```{r}
+# Summary Table
+indonesia_summary <- settlement_data %>% 
+group_by(MPAName) %>%
+  summarise(count = n(),
+            mean_food_security = mean(Food_Security_Index, na.rm = TRUE),
+            mean_place_attachment = mean(Place_Attachment_Index,
+                                               na.rm = TRUE),
+            median_food_security = median(Food_Security_Index, na.rm = TRUE),
+            median_place_attachment = median(Place_Attachment_Index, na.rm = TRUE),
+            variance_food_security = var(Food_Security_Index, na.rm = TRUE),
+            variance_place_attachment = var(Place_Attachment_Index, na.rm = TRUE),
+            sd_food_security = sd(Food_Security_Index, na.rm = TRUE),
+            sd_place_attachment = sd(Place_Attachment_Index, na.rm = TRUE)) %>%
+  ungroup()
+
+# Rename columns
+colnames(indonesia_summary) <- c("MPA Name", "Number of Observations", "Mean Food Security",
+                                 "Mean Place Attachment", "Median Food Security",
+                                 "Median Place Attachment", "Variance Food Security",
+                                 "Variance Place Attachment", "SD Food Security",
+                                 "SD Place Attachment")
+
+# Export Table
+write.csv(indonesia_summary, "Indonesia_Summary_Statistics.csv")
 ```
 
