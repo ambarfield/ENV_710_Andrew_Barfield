@@ -88,18 +88,18 @@ ggsave("BarfieldAEmersonKSwarupSFig1.jpg", plot = histogram_1)
 # Graph 2
 # A scatterplot depicting the relationship between the food security 
 # and place attachment indices
-fs_pa_scatterplot <- ggplot(settlement_data, aes(x = Food_Security_Index,
+fs_pa_scatterplot <- ggplot(settlement_data, aes(x = YrResident,
                             y = Place_Attachment_Index)) +
   geom_point(aes(colour = MPAName)) +
   geom_smooth(method = "lm", color = "black") +
   facet_grid(~MPAName) +
-  labs(x = "Food Security Index",
+  labs(x = "Household Years of Residency",
        y = "Place Attachment Index",
        color = "MPA Name") +
-  ggtitle("Relationship Between Household Food Security 
+  ggtitle("Relationship Between Household Years of Residency 
 and MPA Place Attachment within Papua, Indonesian") +
   theme_bw() +
-  theme(legend.position = "bottom",
+  theme(legend.position = "none",
         legend.background = element_rect(color = "black"),
         strip.text.x = element_text(size = 7),
         plot.title = element_text(hjust = 0.5))
