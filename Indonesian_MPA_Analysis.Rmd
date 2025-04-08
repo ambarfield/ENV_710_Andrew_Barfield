@@ -510,15 +510,26 @@ settlement_data <- settlement_data %>%
 ```{r}
 #Build first logistic regression model with PIA_Binary as response variable
 PIA_glm <- glm(PIA_Binary ~  Household_Material_Assets + Household_Marine_Tenure + Food_Security_Index + School_Enrollment_Rate, data = settlement_data)
+```
+
+```{r}
+# Communicate Results
+# The results of our logistic regression reveal that Household Material Assets is a significant predictor (p < 0.05) of the binary place attachment variable.
+# AIC: 595.94
+
+# household material assets p = 0.035
+# household marine tenure p = 0.224
+#food security index p = 0.123
+# school enrollment rate p  = 0.507 *
 
 #As an initial pass, Household Material Assets is a significant predictor (p < 0.05) of PIA_Binary
-#Interesting as Household Material Assets did not show a strong correlation with overall Place Attachment but could based on Binary PIA values.
+#Interesting as Household Material Assets did not show a strong correlation with overall Place Attachment but could be due to binary PIA values.
 summary(PIA_glm)
 ```
 
 # Multi-level model with household variables (Sameer)
 ```{r}
-# Fit multi-level model with random intercept by plot as a sensitivity analysis
+# Fit multi-level model with random intercept by MPA as a sensitivity analysis
 place_attachment_household_mlm <- lme(Place_Attachment_Index ~ 
                             Household_Marine_Tenure +
                             Household_Material_Assets +
