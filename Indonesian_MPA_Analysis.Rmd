@@ -20,6 +20,7 @@ library(here)
 library(moments)
 library(dunn.test)
 library(nlme)
+library(gt)
 ```
 
 # Load and Clean Data (Sameer)
@@ -67,10 +68,12 @@ histogram_1 <- ggplot(settlement_data, aes(x = Food_Security_Index,
                                            fill = MPAName)) +
   geom_histogram(bins = 6, binwidth = 0.5) +  # follow rice's rule to get 6ish
   labs(x = "Food Security Index", 
-       y = "Count") +
+       y = "Settlement Observation Count",
+       title = "Food Security Index Distributions within Six MPAs in Papua, Indonesia") +
   facet_wrap(~MPAName, nrow = 2)+
   theme_bw() +
-  theme(legend.position = "none") 
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0.5)) 
 
 # view histogram 
 histogram_1
@@ -94,7 +97,7 @@ fs_pa_scatterplot <- ggplot(settlement_data, aes(x = Food_Security_Index,
        y = "Place Attachment Index",
        color = "MPA Name") +
   ggtitle("Relationship Between Household Food Security 
-and MPA Place Attachment within Indonesian") +
+and MPA Place Attachment within Papua, Indonesian") +
   theme_bw() +
   theme(legend.position = "bottom",
         legend.background = element_rect(color = "black"),
@@ -150,7 +153,8 @@ mt_pa_all_mpas_scatterplot <- ggplot(settlement_data, aes(x = Household_Marine_T
   theme_bw() +
   theme(legend.position = "bottom",
         legend.background = element_rect(color = "black"),
-        strip.text.x = element_text(size = 7))
+        strip.text.x = element_text(size = 7),
+        plot.title = element_text(hjust = 0.5))
 
 #View scatterplot
 mt_pa_all_mpas_scatterplot
@@ -693,5 +697,18 @@ colnames(indonesia_summary) <- c("MPA Name", "Number of Observations", "Mean Foo
 
 # Export Table
 write.csv(indonesia_summary, "Indonesia_Summary_Statistics.csv")
+
+indonesia_gt <- indonesia_summary %>% gt() %>% 
+  fmt_number(columns = c(`Mean Food Security`, `Mean Place Attachment`, `Median Food Security`,
+                         `Median Place Attachment`, `Variance Food Security`,
+                         `Variance Place Attachment`, `SD Food Security`,
+                         `SD Place Attachment`),
+             decimals = 2)
+
+indonesia_gt
+
+gtsave(indonesia_gt,
+       "indonesia_summary_table.png",
+       path = here())
 ```
 
