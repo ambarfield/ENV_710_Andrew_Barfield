@@ -523,19 +523,19 @@ cor.test(settlement_data$Place_Attachment_Index, settlement_data$Food_Security_I
 
 # Multi-collinearity tests
 cor.test(settlement_data$Household_Material_Assets, settlement_data$Household_Marine_Tenure)
-# cor = -0.06, not correlated
+# correlation of the two variable is statistically non-significant, p-value = 0.221, cor = -0.06
 cor.test(settlement_data$Household_Material_Assets, settlement_data$School_Enrollment_Rate)
-# cor = 0.203, not correlated
+# correlation of the two variable is statistically significant, p-value = 3.49e-05, cor = 0.203
 cor.test(settlement_data$Household_Material_Assets, settlement_data$Food_Security_Index)
-# cor = 0.171, not correlated
+# correlation of the two variable is statistically significant, p-value = 0.0005, cor = 0.171
 cor.test(settlement_data$Household_Marine_Tenure, settlement_data$School_Enrollment_Rate)
-# cor = -0.166, not correlated
+# correlation of the two variable is statistically significant, p-value = 0.0008, cor = -0.166
 cor.test(settlement_data$Household_Marine_Tenure, settlement_data$Food_Security_Index)
-# cor = -0.276, likely not correlated
+# correlation of the two variable is statistically significant, p-value = 1.33e-08, cor = -0.276
 cor.test(settlement_data$Food_Security_Index, settlement_data$School_Enrollment_Rate)
-# cor = 0.130, not correlated
+# correlation of the two variable is statistically significant, p-value = 0.009, cor = 0.130
 
-#Covariates and response variable are not correlated with each other
+#Statistical significance of correlations between multiple covariate pairs. However, all the correlations are weak (under 0.3) so we proceed with using all the covariates
 ```
 
 ```{r}
@@ -628,6 +628,7 @@ plot(place_attachment_household_mlm)
 qqnorm(place_attachment_household_mlm)
 
 # Compare AIC Values with logistic regression model - lower AIC value for multi-level model
+#Better residual plots and lower AIC value means we choose multi-level model over logistic regression model
 AIC(PIA_glm, place_attachment_household_mlm)
 ```
 
