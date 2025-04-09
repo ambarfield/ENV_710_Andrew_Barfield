@@ -481,6 +481,8 @@ summary(place_attachment_rlm)
 ```{r}
 #Sameer's Logistics Regression Model for determining Place Attachment
 
+#Research Question: Do socioeconomic indicators (Household Material Assets, Household Marine Tenure, Food Security Index and School Enrollment Rate predict place attachment to MPAs?)
+
 #Define a function for Rice's Rule
 rice_rule <- function(n) {
   return(2 * (n^(1/3)))
@@ -497,6 +499,28 @@ ggplot(settlement_data, aes(x = Place_Attachment_Index)) +
       theme_bw()
 
 #Distribution is approximately normal with a slight right-skew
+```
+```{r}
+# Possible Correlations
+ggplot(data = settlement_data2, aes(x = Household_Material_Assets, 
+                                    y = Place_Attachment_Index)) +
+  geom_point() +
+  theme_bw()
+
+ggplot(data = settlement_data2, aes(x = Household_Marine_Tenure, 
+                                    y = Place_Attachment_Index)) +
+  geom_point() +
+  theme_bw()
+
+ggplot(data = settlement_data, aes(x = Food_Security_Index, 
+                                   y = Place_Attachment_Index)) +
+  geom_point() +
+  theme_bw()
+
+ggplot(data = settlement_data, aes(x = School_Enrollment_Rate, 
+                                   y = Place_Attachment_Index)) +
+  geom_point() +
+  theme_bw()
 ```
 
 ```{r}
@@ -520,7 +544,7 @@ PIA_glm <- glm(PIA_Binary ~  Household_Material_Assets + Household_Marine_Tenure
 # household material assets p = 0.035
 # household marine tenure p = 0.224
 #food security index p = 0.123
-# school enrollment rate p  = 0.507 *
+# school enrollment rate p  = 0.507
 
 #As an initial pass, Household Material Assets is a significant predictor (p < 0.05) of PIA_Binary
 #Interesting as Household Material Assets did not show a strong correlation with overall Place Attachment but could be due to binary PIA values.
@@ -535,12 +559,28 @@ place_attachment_household_mlm <- lme(Place_Attachment_Index ~
                             Household_Material_Assets +
                             School_Enrollment_Rate +
                             Food_Security_Index, random = ~ 1 | MPAName, data = settlement_data2, na.action = na.exclude)
+```
 
-#Interesting to note that school enrollment rate seems to be the only significant predictor of place attachment (as a continuous variable)
+```{r}
 summary(place_attachment_household_mlm)
+# Communicate Results
+# The results of our multi-level regression reveal that School Enrollment Rate is a significant predictor (p < 0.05) of place attachment
+# AIC: -68.69
+
+# household material assets p = 0.237
+# household marine tenure p = 0.233
+#food security index p = 0.804
+# school enrollment rate p  = 0.033
+```
+
+```{r}
+#Residuals show mostly homoscedasticity 
 plot(place_attachment_household_mlm)
+
+#Residuals do not meet normality assumption - heavier tails on both ends
 qqnorm(place_attachment_household_mlm)
-# Compare AIC Values
+
+# Compare AIC Values with logistic regression model - lower AIC value for multi-level model
 AIC(PIA_glm, place_attachment_household_mlm)
 ```
 
