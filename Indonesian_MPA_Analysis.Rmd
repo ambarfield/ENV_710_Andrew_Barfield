@@ -481,7 +481,7 @@ summary(place_attachment_rlm)
 ```{r}
 #Sameer's Logistics Regression Model for determining Place Attachment
 
-#Research Question: Do socioeconomic indicators (Household Material Assets, Household Marine Tenure, Food Security Index and School Enrollment Rate predict place attachment to MPAs?)
+#Research Question: Do socioeconomic indicators (Household Material Assets, Household Marine Tenure, Food Security Index and School Enrollment Rate predict binary place attachment to MPAs (Attached/Not Attached)?)
 
 #Define a function for Rice's Rule
 rice_rule <- function(n) {
@@ -499,28 +499,6 @@ ggplot(settlement_data, aes(x = Place_Attachment_Index)) +
       theme_bw()
 
 #Distribution is approximately normal with a slight right-skew
-```
-```{r}
-# Possible Correlations
-ggplot(data = settlement_data2, aes(x = Household_Material_Assets, 
-                                    y = Place_Attachment_Index)) +
-  geom_point() +
-  theme_bw()
-
-ggplot(data = settlement_data2, aes(x = Household_Marine_Tenure, 
-                                    y = Place_Attachment_Index)) +
-  geom_point() +
-  theme_bw()
-
-ggplot(data = settlement_data, aes(x = Food_Security_Index, 
-                                   y = Place_Attachment_Index)) +
-  geom_point() +
-  theme_bw()
-
-ggplot(data = settlement_data, aes(x = School_Enrollment_Rate, 
-                                   y = Place_Attachment_Index)) +
-  geom_point() +
-  theme_bw()
 ```
 
 ```{r}
@@ -552,6 +530,34 @@ summary(PIA_glm)
 ```
 
 # Multi-level model with household variables (Sameer)
+
+```{r}
+#Research Question: Do socioeconomic indicators (Household Material Assets, Household Marine Tenure, Food Security Index and School Enrollment Rate predict place attachment to MPAs, when accounting for individual variation of place attachment within MPAs?
+
+# Possible Correlations
+ggplot(data = settlement_data2, aes(x = Household_Material_Assets, 
+                                    y = Place_Attachment_Index)) +
+  geom_point() +
+  theme_bw()
+
+ggplot(data = settlement_data2, aes(x = Household_Marine_Tenure, 
+                                    y = Place_Attachment_Index)) +
+  geom_point() +
+  theme_bw()
+
+ggplot(data = settlement_data, aes(x = Food_Security_Index, 
+                                   y = Place_Attachment_Index)) +
+  geom_point() +
+  theme_bw()
+
+ggplot(data = settlement_data, aes(x = School_Enrollment_Rate, 
+                                   y = Place_Attachment_Index)) +
+  geom_point() +
+  theme_bw()
+
+#Only School Enrollment Rate shows some relationship with PLace Attachment - slightly higher density of points with a >4.0 place attachment when School Enrollment Rate increases. All other variables show a random distribution of points with respect to Place Attachment
+```
+
 ```{r}
 # Fit multi-level model with random intercept by MPA as a sensitivity analysis
 place_attachment_household_mlm <- lme(Place_Attachment_Index ~ 
@@ -566,6 +572,7 @@ summary(place_attachment_household_mlm)
 # Communicate Results
 # The results of our multi-level regression reveal that School Enrollment Rate is a significant predictor (p < 0.05) of place attachment
 # AIC: -68.69
+#This checks out with our observations of the scatterplots
 
 # household material assets p = 0.237
 # household marine tenure p = 0.233
@@ -583,12 +590,6 @@ qqnorm(place_attachment_household_mlm)
 # Compare AIC Values with logistic regression model - lower AIC value for multi-level model
 AIC(PIA_glm, place_attachment_household_mlm)
 ```
-
-```{r}
-#Perhaps one more multi-level model where Place Attachmnent Index is added as a binary variable (thresholding is determined by scatterplots with individual covariates)
-```
-
-
 
 # Linear Regression Model (Kayla)
 ```{r}
