@@ -580,8 +580,6 @@ summary(place_attachment_household_mlm)
 # school enrollment rate p  = 0.033
 ```
 
-<<<<<<< HEAD
-=======
 ```{r}
 #Residuals show mostly homoscedasticity 
 plot(place_attachment_household_mlm)
@@ -593,7 +591,6 @@ qqnorm(place_attachment_household_mlm)
 AIC(PIA_glm, place_attachment_household_mlm)
 ```
 
->>>>>>> 2e546d4fe5823367adc70bb1be815513a03b158a
 # Linear Regression Model (Kayla)
 ```{r}
 # Define Research Question:
