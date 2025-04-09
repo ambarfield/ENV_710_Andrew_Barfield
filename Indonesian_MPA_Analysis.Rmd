@@ -529,6 +529,15 @@ PIA_glm <- glm(PIA_Binary ~  Household_Material_Assets + Household_Marine_Tenure
 summary(PIA_glm)
 ```
 
+```{r}
+#No significant outliers from Cook's distance plot
+#Normal Q-Q plot shows residuals do not follow a normal distribution with very heavy tails on lower and upper end
+#Residuals also do not show a random distribution and homoscedasticity
+#Given the AIC value and the residual plots, we will not proceed with this model
+plot(PIA_glm)
+```
+
+
 # Multi-level model with household variables (Sameer)
 
 ```{r}
