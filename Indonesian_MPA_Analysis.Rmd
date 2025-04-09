@@ -483,6 +483,62 @@ summary(place_attachment_rlm)
 
 #Research Question: Do socioeconomic indicators (Household Material Assets, Household Marine Tenure, Food Security Index and School Enrollment Rate predict binary place attachment to MPAs (Attached/Not Attached)?)
 
+```
+
+```{r}
+# Possible relationships between covariates and response variable
+ggplot(data = settlement_data2, aes(x = Household_Material_Assets, 
+                                    y = Place_Attachment_Index)) +
+  geom_point() +
+  theme_bw()
+
+ggplot(data = settlement_data2, aes(x = Household_Marine_Tenure, 
+                                    y = Place_Attachment_Index)) +
+  geom_point() +
+  theme_bw()
+
+ggplot(data = settlement_data, aes(x = Food_Security_Index, 
+                                   y = Place_Attachment_Index)) +
+  geom_point() +
+  theme_bw()
+
+ggplot(data = settlement_data, aes(x = School_Enrollment_Rate, 
+                                   y = Place_Attachment_Index)) +
+  geom_point() +
+  theme_bw()
+
+#Only School Enrollment Rate shows some relationship with PLace Attachment - slightly higher density of points with a >4.0 place attachment when School Enrollment Rate increases. All other variables show a random distribution of points with respect to Place Attachment
+```
+
+```{r}
+# Look at correlation between covariates and response variable
+cor.test(settlement_data$Place_Attachment_Index, settlement_data$Household_Material_Assets)
+# -0.06
+cor.test(settlement_data$Place_Attachment_Index, settlement_data$Household_Marine_Tenure)
+# 0.159
+cor.test(settlement_data$Place_Attachment_Index, settlement_data$School_Enrollment_Rate)
+# -0.135
+cor.test(settlement_data$Place_Attachment_Index, settlement_data$Food_Security_Index)
+# -0.053
+
+# Multi-collinearity tests
+cor.test(settlement_data$Household_Material_Assets, settlement_data$Household_Marine_Tenure)
+# cor = -0.06, not correlated
+cor.test(settlement_data$Household_Material_Assets, settlement_data$School_Enrollment_Rate)
+# cor = 0.203, not correlated
+cor.test(settlement_data$Household_Material_Assets, settlement_data$Food_Security_Index)
+# cor = 0.171, not correlated
+cor.test(settlement_data$Household_Marine_Tenure, settlement_data$School_Enrollment_Rate)
+# cor = -0.166, not correlated
+cor.test(settlement_data$Household_Marine_Tenure, settlement_data$Food_Security_Index)
+# cor = -0.276, likely not correlated
+cor.test(settlement_data$Food_Security_Index, settlement_data$School_Enrollment_Rate)
+# cor = 0.130, not correlated
+
+#Covariates and response variable are not correlated with each other
+```
+
+```{r}
 #Define a function for Rice's Rule
 rice_rule <- function(n) {
   return(2 * (n^(1/3)))
@@ -537,34 +593,9 @@ summary(PIA_glm)
 plot(PIA_glm)
 ```
 
-
 # Multi-level model with household variables (Sameer)
-
 ```{r}
 #Research Question: Do socioeconomic indicators (Household Material Assets, Household Marine Tenure, Food Security Index and School Enrollment Rate predict place attachment to MPAs, when accounting for individual variation of place attachment within MPAs?
-
-# Possible Correlations
-ggplot(data = settlement_data2, aes(x = Household_Material_Assets, 
-                                    y = Place_Attachment_Index)) +
-  geom_point() +
-  theme_bw()
-
-ggplot(data = settlement_data2, aes(x = Household_Marine_Tenure, 
-                                    y = Place_Attachment_Index)) +
-  geom_point() +
-  theme_bw()
-
-ggplot(data = settlement_data, aes(x = Food_Security_Index, 
-                                   y = Place_Attachment_Index)) +
-  geom_point() +
-  theme_bw()
-
-ggplot(data = settlement_data, aes(x = School_Enrollment_Rate, 
-                                   y = Place_Attachment_Index)) +
-  geom_point() +
-  theme_bw()
-
-#Only School Enrollment Rate shows some relationship with PLace Attachment - slightly higher density of points with a >4.0 place attachment when School Enrollment Rate increases. All other variables show a random distribution of points with respect to Place Attachment
 ```
 
 ```{r}
