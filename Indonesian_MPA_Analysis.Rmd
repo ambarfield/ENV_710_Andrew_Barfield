@@ -212,7 +212,7 @@ ma_pa_all_mpas_scatterplot
 ggsave("BarfieldAEmersonKSwarupSFig6.jpg", plot = ma_pa_all_mpas_scatterplot)
 ```
 
-# Generalized Linear Regression Model (Andrew)
+# Multiple Linear Regression Model (Andrew)
 ```{r}
 # Define Research Question:
 # Is there a relationship between place attachment index and gender, 
@@ -458,7 +458,7 @@ place_attachment_lm2 <- gls(Place_Attachment_Index ~
                             Food_Security_Index +
                             YrResident +
                             Age, data = settlement_data2)
-# Fit multi-level model with random intercept by plot
+# Fit multi-level model with MPA name as random effect
 place_attachment_rlm <- lme(Place_Attachment_Index ~ 
                             Household_Marine_Tenure +
                             Food_Security_Index +
@@ -537,8 +537,6 @@ AIC(PIA_glm, place_attachment_household_mlm)
 #Perhaps one more multi-level model where Place Attachmnent Index is added as a binary variable (thresholding is determined by scatterplots with individual covariates)
 ```
 
-
-
 # Linear Regression Model (Kayla)
 ```{r}
 # Define Research Question:
@@ -602,8 +600,8 @@ cor.test(settlement_data$`Household Marine Tenure`, settlement_data$`School Enro
 # try to fit model and see what happens 
 
 # Fit regression model
-Indonesia_household_model <- lm(Place_Attachment_Index ~ `Household Material Assets` +
-                                   `Household Marine Tenure` + `School Enrollment Rate`, 
+Indonesia_household_model <- lm(Place_Attachment_Index ~ `Household_Material_Assets` +
+                                   `Household_Marine_Tenure` + `School_Enrollment_Rate`, 
                                 data = settlement_data)
 
 summary(Indonesia_household_model)
@@ -624,11 +622,14 @@ plot(Indonesia_household_model)
 
 # This model is weak, let's see what it looks like without household material assets
 # Fit regression model
-Indonesia_household_model2 <- lm(Place_Attachment_Index ~ `Household Marine Tenure`
-                                 + `School Enrollment Rate`, 
+Indonesia_household_model2 <- lm(Place_Attachment_Index ~ `Household_Marine_Tenure`
+                                 + `School_Enrollment_Rate`, 
                                 data = settlement_data)
 
 summary(Indonesia_household_model2)
+
+# AIC Value
+AIC(Indonesia_household_model2)
 
 # Evaluate Model Diagnostics
 plot(Indonesia_household_model2)
@@ -644,10 +645,10 @@ plot(Indonesia_household_model2)
 
 ```
 
-Mixed Effects Model - Kayla 
-Trying a mixed effects model with different predictor variables. A mix of individual and 
-household variables to try and build a more significant model. 
+# Mixed Effects Model - Kayla 
 ```{r}
+# Trying a mixed effects model with different predictor variables. A mix of individual and 
+# household variables to try and build a more significant model. 
 # Try a multilevel/mixed effects model using vars we know have a correlation
 # with place attachment 
 
@@ -671,37 +672,33 @@ qqnorm(place_attachment_mem)
 summary(place_attachment_mem)
 ```
 
-# Descriptive Statistics (Andrew)
+# Summary Statistics (Andrew)
 ```{r}
 # Summary Table
 indonesia_summary <- settlement_data %>% 
 group_by(MPAName) %>%
   summarise(count = n(),
-            mean_food_security = mean(Food_Security_Index, na.rm = TRUE),
             mean_place_attachment = mean(Place_Attachment_Index,
                                                na.rm = TRUE),
-            median_food_security = median(Food_Security_Index, na.rm = TRUE),
             median_place_attachment = median(Place_Attachment_Index, na.rm = TRUE),
-            variance_food_security = var(Food_Security_Index, na.rm = TRUE),
             variance_place_attachment = var(Place_Attachment_Index, na.rm = TRUE),
-            sd_food_security = sd(Food_Security_Index, na.rm = TRUE),
             sd_place_attachment = sd(Place_Attachment_Index, na.rm = TRUE)) %>%
   ungroup()
 
 # Rename columns
-colnames(indonesia_summary) <- c("MPA Name", "Number of Observations", "Mean Food Security",
-                                 "Mean Place Attachment", "Median Food Security",
-                                 "Median Place Attachment", "Variance Food Security",
-                                 "Variance Place Attachment", "SD Food Security",
+colnames(indonesia_summary) <- c("MPA Name", "Number of Observations",
+                                 "Mean Place Attachment",
+                                 "Median Place Attachment",
+                                 "Variance Place Attachment",
                                  "SD Place Attachment")
 
 # Export Table
 write.csv(indonesia_summary, "Indonesia_Summary_Statistics.csv")
 
 indonesia_gt <- indonesia_summary %>% gt() %>% 
-  fmt_number(columns = c(`Mean Food Security`, `Mean Place Attachment`, `Median Food Security`,
-                         `Median Place Attachment`, `Variance Food Security`,
-                         `Variance Place Attachment`, `SD Food Security`,
+  fmt_number(columns = c(`Mean Place Attachment`,
+                         `Median Place Attachment`,
+                         `Variance Place Attachment`,
                          `SD Place Attachment`),
              decimals = 2)
 
@@ -710,5 +707,48 @@ indonesia_gt
 gtsave(indonesia_gt,
        "indonesia_summary_table.png",
        path = here())
+
+# Create mean of other variables table
+indonesia_mean_summary <- settlement_data %>% 
+  summarise(mean_household_material_assets = mean(Household_Material_Assets,
+                                                  na.rm = TRUE),
+            mean_household_marine_tenure = mean(Household_Marine_Tenure,
+                                                na.rm = TRUE),
+            mean_food_security_index = mean(Food_Security_Index,
+                                            na.rm = TRUE),
+            mean_place_attachment_index = mean(Place_Attachment_Index,
+                                               na.rm = TRUE),
+            mean_school_enrollment_rate = mean(School_Enrollment_Rate,
+                                               na.rm = TRUE),
+            mean_years_residency = mean(YrResident, na.rm = TRUE),
+            mean_household_age = mean(Age, na.rm = TRUE),
+            mean_gender = mean(Gender, na.rm = TRUE))
+
+# Rename columns
+colnames(indonesia_mean_summary) <- c("Household Material Assets",
+                                      "Household Marine Tenure",
+                                      "Food Security Index",
+                                      "Place Attachment Index",
+                                      "School Enrollment Rate",
+                                      "Years of Residency",
+                                      "Age",
+                                      "Gender")
+
+indonesia_mean_summary <- indonesia_mean_summary %>% 
+  pivot_longer(cols = `Household Material Assets`:Gender,
+               names_to = "Variable Name",
+               values_to = "Mean")
+
+# Export Table
+indonesia_gt2 <- indonesia_mean_summary %>% gt() %>% 
+  fmt_number(columns = c(Mean),
+             decimals = 2)
+
+indonesia_gt2
+
+gtsave(indonesia_gt2,
+       "indonesia_mean_summary_table.png",
+       path = here())
+
 ```
 
