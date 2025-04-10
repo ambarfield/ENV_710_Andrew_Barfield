@@ -1,0 +1,2664 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{anyfontsize}
+\usepackage{multirow}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Indonesia MPA Analysis},
+  pdfauthor={Sameer, Andrew, Kayla},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Indonesia MPA Analysis}
+\author{Sameer, Andrew, Kayla}
+\date{2025-03-01}
+
+\begin{document}
+\maketitle
+
+\section{Setup}\label{setup}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Importing libraries for Shiny dashboard and documentation}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.4     v readr     2.1.5
+## v forcats   1.0.0     v stringr   1.5.1
+## v ggplot2   3.5.1     v tibble    3.2.1
+## v lubridate 1.9.4     v tidyr     1.3.1
+## v purrr     1.0.2     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(rlang)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'rlang'
+## 
+## The following objects are masked from 'package:purrr':
+## 
+##     %@%, flatten, flatten_chr, flatten_dbl, flatten_int, flatten_lgl,
+##     flatten_raw, invoke, splice
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(roxygen2)}
+\FunctionTok{library}\NormalTok{(gridExtra)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'gridExtra'
+## 
+## The following object is masked from 'package:dplyr':
+## 
+##     combine
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(here)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## here() starts at /Users/kaylaemerson/Desktop/ENV710_Statistics/FinalProject/ENV710_FinalProject
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(moments)}
+\FunctionTok{library}\NormalTok{(dunn.test)}
+\FunctionTok{library}\NormalTok{(nlme)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'nlme'
+## 
+## The following object is masked from 'package:dplyr':
+## 
+##     collapse
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(gt)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Load and Clean Data (Sameer)}\label{load-and-clean-data-sameer}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Load dataset from an RDS file named "optdata.rds"}
+\NormalTok{settlement\_data }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"Settlement\_Data\_with\_updated\_demographics.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## New names:
+## Rows: 411 Columns: 16
+## -- Column specification
+## -------------------------------------------------------- Delimiter: "," chr
+## (4): MonitoringYear, SettlementName, MPAName, TimePoint dbl (12): ...1,
+## SettlementID, MPAID, Treatment, MAIndex, MTIndex, FSIndex, P...
+## i Use `spec()` to retrieve the full column specification for this data. i
+## Specify the column types or set `show_col_types = FALSE` to quiet this message.
+## * `` -> `...1`
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(settlement\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 16
+##    ...1 SettlementID MonitoringYear SettlementName MPAID MPAName       Treatment
+##   <dbl>        <dbl> <chr>          <chr>          <dbl> <chr>             <dbl>
+## 1     1            1 Baseline       Araway             1 Teluk Mayali~         1
+## 2     2            1 2 Year Post    Araway             1 Teluk Mayali~         1
+## 3     3            1 4 Year Post    Araway             1 Teluk Mayali~         1
+## 4     4            1 7 Year Post    Araway             1 Teluk Mayali~         1
+## 5     5            2 Baseline       Beo                1 Teluk Mayali~         1
+## 6     6            2 2 Year Post    Beo                1 Teluk Mayali~         1
+## # i 9 more variables: TimePoint <chr>, MAIndex <dbl>, MTIndex <dbl>,
+## #   FSIndex <dbl>, PAIndex <dbl>, SERate <dbl>, YrResident <dbl>, Age <dbl>,
+## #   Gender <dbl>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Rename columns}
+\NormalTok{settlement\_data }\OtherTok{\textless{}{-}}\NormalTok{ settlement\_data }\SpecialCharTok{\%\textgreater{}\%}
+                  \FunctionTok{rename}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Household\_Material\_Assets}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ MAIndex, }\StringTok{\textasciigrave{}}\AttributeTok{Household\_Marine\_Tenure}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ MTIndex, }
+                         \StringTok{\textasciigrave{}}\AttributeTok{Food\_Security\_Index}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ FSIndex, }\StringTok{\textasciigrave{}}\AttributeTok{Place\_Attachment\_Index}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ PAIndex,}
+                          \StringTok{\textasciigrave{}}\AttributeTok{School\_Enrollment\_Rate}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ SERate)}
+\FunctionTok{head}\NormalTok{(settlement\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 16
+##    ...1 SettlementID MonitoringYear SettlementName MPAID MPAName       Treatment
+##   <dbl>        <dbl> <chr>          <chr>          <dbl> <chr>             <dbl>
+## 1     1            1 Baseline       Araway             1 Teluk Mayali~         1
+## 2     2            1 2 Year Post    Araway             1 Teluk Mayali~         1
+## 3     3            1 4 Year Post    Araway             1 Teluk Mayali~         1
+## 4     4            1 7 Year Post    Araway             1 Teluk Mayali~         1
+## 5     5            2 Baseline       Beo                1 Teluk Mayali~         1
+## 6     6            2 2 Year Post    Beo                1 Teluk Mayali~         1
+## # i 9 more variables: TimePoint <chr>, Household_Material_Assets <dbl>,
+## #   Household_Marine_Tenure <dbl>, Food_Security_Index <dbl>,
+## #   Place_Attachment_Index <dbl>, School_Enrollment_Rate <dbl>,
+## #   YrResident <dbl>, Age <dbl>, Gender <dbl>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Round values to 2 decimal place}
+\NormalTok{settlement\_data }\OtherTok{\textless{}{-}}\NormalTok{ settlement\_data }\SpecialCharTok{\%\textgreater{}\%} 
+                  \FunctionTok{mutate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Household\_Material\_Assets}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{round}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Household\_Material\_Assets}\StringTok{\textasciigrave{}}\NormalTok{, }\DecValTok{2}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+                  \FunctionTok{mutate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Household\_Marine\_Tenure}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{round}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Household\_Marine\_Tenure}\StringTok{\textasciigrave{}}\NormalTok{, }\DecValTok{2}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+                  \FunctionTok{mutate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Food\_Security\_Index}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{round}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Food\_Security\_Index}\StringTok{\textasciigrave{}}\NormalTok{, }\DecValTok{2}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+                  \FunctionTok{mutate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Place\_Attachment\_Index}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{round}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Place\_Attachment\_Index}\StringTok{\textasciigrave{}}\NormalTok{, }\DecValTok{2}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+                  \FunctionTok{mutate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{School\_Enrollment\_Rate}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{round}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{School\_Enrollment\_Rate}\StringTok{\textasciigrave{}}\NormalTok{, }\DecValTok{2}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+                  \FunctionTok{mutate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{YrResident}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{round}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{YrResident}\StringTok{\textasciigrave{}}\NormalTok{, }\DecValTok{2}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+                  \FunctionTok{mutate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Age}\StringTok{\textasciigrave{}}\OtherTok{=} \FunctionTok{round}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Age}\StringTok{\textasciigrave{}}\NormalTok{, }\DecValTok{2}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+                  \FunctionTok{mutate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Gender}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{round}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Gender}\StringTok{\textasciigrave{}}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\CommentTok{\#Look at summary}
+\FunctionTok{summary}\NormalTok{(settlement\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       ...1        SettlementID    MonitoringYear     SettlementName    
+##  Min.   :  1.0   Min.   :  1.00   Length:411         Length:411        
+##  1st Qu.:103.5   1st Qu.: 28.00   Class :character   Class :character  
+##  Median :206.0   Median : 54.00   Mode  :character   Mode  :character  
+##  Mean   :206.0   Mean   : 54.65                                        
+##  3rd Qu.:308.5   3rd Qu.: 80.00                                        
+##  Max.   :411.0   Max.   :115.00                                        
+##      MPAID         MPAName            Treatment       TimePoint        
+##  Min.   :1.000   Length:411         Min.   :0.0000   Length:411        
+##  1st Qu.:2.000   Class :character   1st Qu.:0.0000   Class :character  
+##  Median :3.000   Mode  :character   Median :1.0000   Mode  :character  
+##  Mean   :3.416                      Mean   :0.6886                     
+##  3rd Qu.:5.000                      3rd Qu.:1.0000                     
+##  Max.   :6.000                      Max.   :1.0000                     
+##  Household_Material_Assets Household_Marine_Tenure Food_Security_Index
+##  Min.   :0.1500            Min.   :1.000           Min.   :0.420      
+##  1st Qu.:0.4300            1st Qu.:1.900           1st Qu.:3.075      
+##  Median :0.4900            Median :2.340           Median :3.480      
+##  Mean   :0.4821            Mean   :2.401           Mean   :3.406      
+##  3rd Qu.:0.5400            3rd Qu.:2.875           3rd Qu.:3.820      
+##  Max.   :0.7400            Max.   :4.250           Max.   :4.850      
+##  Place_Attachment_Index School_Enrollment_Rate   YrResident         Age       
+##  Min.   :3.430          Min.   :0.1200         Min.   : 1.53   Min.   :28.40  
+##  1st Qu.:3.900          1st Qu.:0.7400         1st Qu.:24.24   1st Qu.:41.84  
+##  Median :4.000          Median :0.8300         Median :30.30   Median :44.82  
+##  Mean   :4.015          Mean   :0.8123         Mean   :29.06   Mean   :44.69  
+##  3rd Qu.:4.090          3rd Qu.:0.9100         3rd Qu.:35.38   3rd Qu.:47.65  
+##  Max.   :4.990          Max.   :1.0000         Max.   :46.67   Max.   :59.80  
+##      Gender      
+##  Min.   :0.6000  
+##  1st Qu.:0.8800  
+##  Median :0.9200  
+##  Mean   :0.9144  
+##  3rd Qu.:1.0000  
+##  Max.   :1.0000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Remove NAs}
+\NormalTok{settlement\_data }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(settlement\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Figure 1 (Kayla)}\label{figure-1-kayla}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Graph 1}
+\CommentTok{\# visualize the distribution of the food security index observations by MPA }
+\NormalTok{histogram\_1 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Place\_Attachment\_Index,}
+                                           \AttributeTok{fill =}\NormalTok{ MPAName)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{8}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# follow rice\textquotesingle{}s rule to get 6ish}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Place Attachment Index"}\NormalTok{, }
+       \AttributeTok{y =} \StringTok{"Settlement Observation Count"}\NormalTok{,}
+       \AttributeTok{title =} \StringTok{"Place Attachment Index Distributions within Six MPAs in Papua, Indonesia"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{MPAName, }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{)) }
+
+\CommentTok{\# view histogram }
+\NormalTok{histogram\_1}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# save histogram to files }
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"BarfieldAEmersonKSwarupSFig1.jpg"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ histogram\_1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+\end{verbatim}
+
+\section{Figure 2 (Andrew)}\label{figure-2-andrew}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Graph 2}
+\CommentTok{\# A scatterplot depicting the relationship between the food security }
+\CommentTok{\# and place attachment indices}
+\NormalTok{fs\_pa\_scatterplot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ YrResident,}
+                            \AttributeTok{y =}\NormalTok{ Place\_Attachment\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{colour =}\NormalTok{ MPAName)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_grid}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{MPAName) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Household Years of Residency"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Place Attachment Index"}\NormalTok{,}
+       \AttributeTok{color =} \StringTok{"MPA Name"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Relationship Between Household Years of Residency }
+\StringTok{and MPA Place Attachment within Papua, Indonesian"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+        \AttributeTok{legend.background =} \FunctionTok{element\_rect}\NormalTok{(}\AttributeTok{color =} \StringTok{"black"}\NormalTok{),}
+        \AttributeTok{strip.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{7}\NormalTok{),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\CommentTok{\# View scatterplot}
+\NormalTok{fs\_pa\_scatterplot}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\begin{figure}
+\centering
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-7-1.pdf}
+\caption{A series of scatterplots depicting the relationship between
+food security and place attachment within specific marine protected area
+(MPA) regions in Indonesia. Both indices are scaled 1-5.}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# save scatterplot to files }
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"BarfieldAEmersonKSwarupSFig2.jpg"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ fs\_pa\_scatterplot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\section{Figure 3 (Sameer)}\label{figure-3-sameer}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Household Marine Tenure is defined as the average number of rights a household}
+\CommentTok{\# has over marine resources in their MPA}
+\CommentTok{\#Potential for this to be a strong predictor of Place Attachment Index}
+
+\CommentTok{\#Draw a scatterplot with a regression line to examine correlation}
+\NormalTok{mt\_pa\_scatterplot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Household\_Marine\_Tenure, }
+                                                 \AttributeTok{y =}\NormalTok{ Place\_Attachment\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Household Marine Tenure"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Place Attachment Index"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Relationship of Place Attachment to Bird\textquotesingle{}s Head Seascape MPAs against }
+\StringTok{          Household Rights over Marine Resources"}\NormalTok{)}
+
+\NormalTok{mt\_pa\_scatterplot}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\begin{figure}
+\centering
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-8-1.pdf}
+\caption{A scatterplot depicting the relationship between household
+marine tenure and place attachment over all marine protected areas
+(MPAs) in Bird's Head Seascape, Indonesia. Both indices are scaled 1-5.}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# save scatterplot to files }
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"BarfieldAEmersonKSwarupSFig3.jpg"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ mt\_pa\_scatterplot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+Figure 4 (Sameer)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Homoscedastic distribution of Place Attachment Index values when plotted against }
+\CommentTok{\# Household Marine Tenure in Figure 3}
+
+\CommentTok{\#Will examine scatterplot of Place Attachment Index against Household Marine }
+\CommentTok{\#Tenure for the various MPAs}
+\NormalTok{mt\_pa\_all\_mpas\_scatterplot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Household\_Marine\_Tenure,}
+                            \AttributeTok{y =}\NormalTok{ Place\_Attachment\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{colour =}\NormalTok{ MPAName)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_grid}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{MPAName) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Household Marine Tenure"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Place Attachment Index"}\NormalTok{,}
+       \AttributeTok{color =} \StringTok{"MPA Name"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Relationship Between Household Marine Tenure and Place Attachment to}
+\StringTok{          MPAs in Bird\textquotesingle{}s Head Seascape, Indonesia"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{,}
+        \AttributeTok{legend.background =} \FunctionTok{element\_rect}\NormalTok{(}\AttributeTok{color =} \StringTok{"black"}\NormalTok{),}
+        \AttributeTok{strip.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{7}\NormalTok{),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\CommentTok{\#View scatterplot}
+\NormalTok{mt\_pa\_all\_mpas\_scatterplot}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\begin{figure}
+\centering
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-9-1.pdf}
+\caption{A series of scatterplots depicting the relationship between
+household marine tenure and place attachment within specific marine
+protected area (MPA) regions in Indonesia. Both indices are scaled 1-5.}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# save scatterplot to files }
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"BarfieldAEmersonKSwarupSFig4.jpg"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ mt\_pa\_all\_mpas\_scatterplot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\section{Figure 5 (Sameer)}\label{figure-5-sameer}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Household Material Assets is defined as the economic well{-}being of a household}
+\CommentTok{\#Potential for this to be a strong predictor of Place Attachment Index}
+
+\CommentTok{\#Draw a scatterplot with a regression line to examine correlation}
+\NormalTok{ma\_pa\_scatterplot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Household\_Material\_Assets, }\AttributeTok{y =}\NormalTok{ Place\_Attachment\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Household Material Assets"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Place Attachment Index"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Relationship of Place Attachment to Bird\textquotesingle{}s Head Seascape MPAs against }
+\StringTok{          Household Material Assets"}\NormalTok{)}
+
+\NormalTok{ma\_pa\_scatterplot}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\begin{figure}
+\centering
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-10-1.pdf}
+\caption{A scatterplot depicting the relationship between household
+material assets and place attachment over all marine protected areas
+(MPAs) in Bird's Head Seascape, Indonesia.}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# save scatterplot to files }
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"BarfieldAEmersonKSwarupSFig5.jpg"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ ma\_pa\_scatterplot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+Figure 6 (Sameer)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Homoscedastic distribution of Place Attachment Index values when plotted against }
+\CommentTok{\# Household Material Assets in Figure 5}
+
+\CommentTok{\#Will examine scatterplot of Place Attachment Index against Household Material Assets for the various MPAs}
+\NormalTok{ma\_pa\_all\_mpas\_scatterplot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Household\_Material\_Assets,}
+                            \AttributeTok{y =}\NormalTok{ Place\_Attachment\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{colour =}\NormalTok{ MPAName)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_grid}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{MPAName) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Household Material Assets"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Place Attachment Index"}\NormalTok{,}
+       \AttributeTok{color =} \StringTok{"MPA Name"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Relationship Between Household Material Assets and Place Attachment }
+\StringTok{          to MPAs in Bird\textquotesingle{}s Head Seascape, Indonesia"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{,}
+        \AttributeTok{legend.background =} \FunctionTok{element\_rect}\NormalTok{(}\AttributeTok{color =} \StringTok{"black"}\NormalTok{),}
+        \AttributeTok{strip.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{7}\NormalTok{))}
+
+\CommentTok{\#View scatterplot}
+\NormalTok{ma\_pa\_all\_mpas\_scatterplot}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\begin{figure}
+\centering
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-11-1.pdf}
+\caption{A series of scatterplots depicting the relationship between
+household material assets and place attachment within specific marine
+protected area (MPA) regions in Indonesia.}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# save scatterplot to files }
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"BarfieldAEmersonKSwarupSFig6.jpg"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ ma\_pa\_all\_mpas\_scatterplot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\section{Multiple Linear Regression Model
+(Andrew)}\label{multiple-linear-regression-model-andrew}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Define Research Question:}
+\CommentTok{\# Is there a relationship between place attachment index and gender, }
+\CommentTok{\# age, and years of residency in Indonesian households?}
+
+\CommentTok{\# Examine data and possible correlations}
+\CommentTok{\# Raw Counts}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Place\_Attachment\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Count"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Age)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Count"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-12-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Gender)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Count"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-12-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ YrResident)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Count"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-12-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Possible Correlations}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Age, }\AttributeTok{y =}\NormalTok{ Place\_Attachment\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-12-5.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Gender, }\AttributeTok{y =}\NormalTok{ Place\_Attachment\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-12-6.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ YrResident, }\AttributeTok{y =}\NormalTok{ Place\_Attachment\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-12-7.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Multi{-}collinearity tests}
+\FunctionTok{cor.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Age, settlement\_data}\SpecialCharTok{$}\NormalTok{Gender)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data$Age and settlement_data$Gender
+## t = -6.1839, df = 409, p-value = 1.517e-09
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.3784339 -0.2013749
+## sample estimates:
+##        cor 
+## -0.2924084
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Age, settlement\_data}\SpecialCharTok{$}\NormalTok{YrResident)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data$Age and settlement_data$YrResident
+## t = 9.553, df = 409, p-value < 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.3446207 0.5030580
+## sample estimates:
+##       cor 
+## 0.4271122
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Gender, settlement\_data}\SpecialCharTok{$}\NormalTok{YrResident)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data$Gender and settlement_data$YrResident
+## t = -1.795, df = 409, p-value = 0.07339
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.183570869  0.008389558
+## sample estimates:
+##         cor 
+## -0.08841148
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fit regression model}
+\NormalTok{Indonesia\_individual\_model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Place\_Attachment\_Index }\SpecialCharTok{\textasciitilde{}}\NormalTok{ YrResident }\SpecialCharTok{+}
+\NormalTok{                                   Age }\SpecialCharTok{+}\NormalTok{ Gender, }\AttributeTok{data =}\NormalTok{ settlement\_data)}
+
+
+\FunctionTok{summary}\NormalTok{(Indonesia\_individual\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Place_Attachment_Index ~ YrResident + Age + Gender, 
+##     data = settlement_data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.58177 -0.11080 -0.01866  0.08451  1.00455 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  4.1429070  0.1954449  21.197   <2e-16 ***
+## YrResident   0.0020024  0.0013464   1.487    0.138    
+## Age          0.0004525  0.0028256   0.160    0.873    
+## Gender      -0.2260258  0.1389061  -1.627    0.104    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.2094 on 407 degrees of freedom
+## Multiple R-squared:  0.01592,    Adjusted R-squared:  0.008666 
+## F-statistic: 2.195 on 3 and 407 DF,  p-value: 0.08812
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# AIC Value of linear model}
+\FunctionTok{AIC}\NormalTok{(Indonesia\_individual\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -112.9781
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Evaluate Model Diagnostics}
+\FunctionTok{plot}\NormalTok{(Indonesia\_individual\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-12-8.pdf}
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-12-9.pdf}
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-12-10.pdf}
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-12-11.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Communicate Results}
+\CommentTok{\# The results of our multiple linear regression reveal that age, gender, and}
+\CommentTok{\# years of residency are not significant predictors of place attachment in }
+\CommentTok{\# Indonesia (F(410) = 2.195, adjusted R\^{}2 = 0.009, p = 0.09). }
+\end{Highlighting}
+\end{Shaded}
+
+\section{Kruskal Wallis and Dunn's Test 1
+(Andrew)}\label{kruskal-wallis-and-dunns-test-1-andrew}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Null Hypothesis: Place attachment between all MPAs are the same.}
+
+\CommentTok{\# Alternative Hypothesis: Place attachment between at least two }
+\CommentTok{\# MPAs are different. }
+
+\CommentTok{\# Examining Data Distributions}
+\FunctionTok{ggplot}\NormalTok{(settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Place\_Attachment\_Index,}
+                            \AttributeTok{fill =}\NormalTok{ MPAName)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{facet\_grid}\NormalTok{(.}\SpecialCharTok{\textasciitilde{}}\NormalTok{MPAName) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Place Attachment Index"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Count"}\NormalTok{,}
+       \AttributeTok{color =} \StringTok{"MPA Name"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{,}
+        \AttributeTok{strip.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{7}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Use Q{-}Q Plots, skewness, and kurtosis to test for normality}
+\FunctionTok{ggplot}\NormalTok{(settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{sample =}\NormalTok{ Place\_Attachment\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_qq}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_qq\_line}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{ (}\AttributeTok{x =} \StringTok{"Theoretical Normal Distribution"}\NormalTok{,}
+        \AttributeTok{y =} \StringTok{"Raw Place Attachment Index Values"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-13-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{skewness}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Place\_Attachment\_Index)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.254365
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{kurtosis}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Place\_Attachment\_Index)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6.929917
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Non{-}normal data, so we will use Kruskal{-}Wallis and Dunn\textquotesingle{}s post{-}hoc tests}
+\NormalTok{Indonesia\_MPA\_kruskal\_test }\OtherTok{\textless{}{-}} \FunctionTok{kruskal.test}\NormalTok{(Place\_Attachment\_Index }\SpecialCharTok{\textasciitilde{}}\NormalTok{ MPAName, }
+                                                  \AttributeTok{data =}\NormalTok{ settlement\_data)}
+
+\NormalTok{Indonesia\_MPA\_kruskal\_test}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  Place_Attachment_Index by MPAName
+## Kruskal-Wallis chi-squared = 16.183, df = 5, p-value = 0.00634
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Results of Kruskal Test are significant, so let\textquotesingle{}s run a Dunn\textquotesingle{}s Test}
+\NormalTok{Indonesia\_MPA\_dunn\_test }\OtherTok{\textless{}{-}} \FunctionTok{dunn.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Place\_Attachment\_Index, settlement\_data}\SpecialCharTok{$}\NormalTok{MPAName)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Kruskal-Wallis rank sum test
+## 
+## data: x and group
+## Kruskal-Wallis chi-squared = 16.1834, df = 5, p-value = 0.01
+## 
+## 
+##                            Comparison of x by group                            
+##                                 (No adjustment)                                
+## Col Mean-|
+## Row Mean |   Kaimana    Kofiau d   Misool S   Selat Da   Teluk Ce
+## ---------+-------------------------------------------------------
+## Kofiau d |  -2.688998
+##          |    0.0036*
+##          |
+## Misool S |  -2.118790   1.056939
+##          |    0.0171*     0.1453
+##          |
+## Selat Da |  -0.143330   2.586212   1.987140
+##          |     0.4430    0.0049*    0.0235*
+##          |
+## Teluk Ce |  -2.768019   0.772198  -0.469646  -2.631757
+##          |    0.0028*     0.2200     0.3193    0.0042*
+##          |
+## Teluk Ma |  -2.193081   0.768487  -0.278202  -2.072756   0.113658
+##          |    0.0142*     0.2211     0.3904    0.0191*     0.4548
+## 
+## alpha = 0.05
+## Reject Ho if p <= alpha/2
+\end{verbatim}
+
+\section{Kruskal Wallis and Dunn's Test 2
+(Andrew)}\label{kruskal-wallis-and-dunns-test-2-andrew}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Null Hypothesis: Food security between all MPAs are the same.}
+
+\CommentTok{\# Alternative Hypothesis: Food security between at least two }
+\CommentTok{\# MPAs are different. }
+
+\CommentTok{\# Examining Data Distributions}
+\FunctionTok{ggplot}\NormalTok{(settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Food\_Security\_Index,}
+                            \AttributeTok{fill =}\NormalTok{ MPAName)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{facet\_grid}\NormalTok{(.}\SpecialCharTok{\textasciitilde{}}\NormalTok{MPAName) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Food Security Index"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Count"}\NormalTok{,}
+       \AttributeTok{color =} \StringTok{"MPA Name"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{,}
+        \AttributeTok{strip.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{7}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Use Q{-}Q Plots, skewness, and kurtosis to test for normality}
+\FunctionTok{ggplot}\NormalTok{(settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{sample =}\NormalTok{ Food\_Security\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_qq}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_qq\_line}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{ (}\AttributeTok{x =} \StringTok{"Theoretical Normal Distribution"}\NormalTok{,}
+        \AttributeTok{y =} \StringTok{"Raw Food Security Index Values"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-14-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{skewness}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Food\_Security\_Index)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.8122661
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{kurtosis}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Food\_Security\_Index)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4.571809
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Non{-}normal data, so we will use Kruskal{-}Wallis and Dunn\textquotesingle{}s post{-}hoc tests}
+\NormalTok{Indonesia\_MPA\_kruskal\_test2 }\OtherTok{\textless{}{-}} \FunctionTok{kruskal.test}\NormalTok{(Food\_Security\_Index }\SpecialCharTok{\textasciitilde{}}\NormalTok{ MPAName, }
+                                                  \AttributeTok{data =}\NormalTok{ settlement\_data)}
+
+\NormalTok{Indonesia\_MPA\_kruskal\_test2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  Food_Security_Index by MPAName
+## Kruskal-Wallis chi-squared = 13.316, df = 5, p-value = 0.02059
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Results of Kruskal Test are significant, so let\textquotesingle{}s run a Dunn\textquotesingle{}s Test}
+\NormalTok{Indonesia\_MPA\_dunn\_test2 }\OtherTok{\textless{}{-}} \FunctionTok{dunn.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Food\_Security\_Index, settlement\_data}\SpecialCharTok{$}\NormalTok{MPAName)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Kruskal-Wallis rank sum test
+## 
+## data: x and group
+## Kruskal-Wallis chi-squared = 13.3157, df = 5, p-value = 0.02
+## 
+## 
+##                            Comparison of x by group                            
+##                                 (No adjustment)                                
+## Col Mean-|
+## Row Mean |   Kaimana    Kofiau d   Misool S   Selat Da   Teluk Ce
+## ---------+-------------------------------------------------------
+## Kofiau d |   1.934056
+##          |     0.0266
+##          |
+## Misool S |   1.843798  -0.503765
+##          |     0.0326     0.3072
+##          |
+## Selat Da |  -0.962296  -2.723294  -2.858532
+##          |     0.1680    0.0032*    0.0021*
+##          |
+## Teluk Ce |   0.404722  -1.783939  -1.696291   1.505559
+##          |     0.3428     0.0372     0.0449     0.0661
+##          |
+## Teluk Ma |   1.331516  -0.756317  -0.354337   2.246937   1.114744
+##          |     0.0915     0.2247     0.3615    0.0123*     0.1325
+## 
+## alpha = 0.05
+## Reject Ho if p <= alpha/2
+\end{verbatim}
+
+\section{Multi-level Regression Model
+(Andrew)}\label{multi-level-regression-model-andrew}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Make MPA names into a factor with 6 levels}
+\NormalTok{settlement\_data2 }\OtherTok{\textless{}{-}}\NormalTok{ settlement\_data }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{MPAName =} \FunctionTok{factor}\NormalTok{(MPAName, }\AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Kaimana MPA"}\NormalTok{,}
+                                              \StringTok{"Kofiau dan Pulau Boo MPA"}\NormalTok{,}
+                                              \StringTok{"Misool Selatan Timur MPA"}\NormalTok{,}
+                                              \StringTok{"Selat Dampier MPA"}\NormalTok{,}
+                                              \StringTok{"Teluk Cenderawasih NP"}\NormalTok{,}
+                                              \StringTok{"Teluk Mayalibit MPA"}\NormalTok{)))}
+
+\CommentTok{\# Define Research Question:}
+\CommentTok{\# Do marine tenure, food security index, years of residency, and age}
+\CommentTok{\# significantly predict place attachment index in Indonesian households?}
+
+\CommentTok{\# Examine data and possible correlations}
+\CommentTok{\# Raw counts}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Household\_Marine\_Tenure)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Count"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Food\_Security\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Count"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-15-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ YrResident)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Count"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-15-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Age)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Count"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-15-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Place\_Attachment\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Count"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-15-5.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Possible Correlations}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Household\_Marine\_Tenure, }
+                                    \AttributeTok{y =}\NormalTok{ Place\_Attachment\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-15-6.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Food\_Security\_Index, }
+                                   \AttributeTok{y =}\NormalTok{ Place\_Attachment\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-15-7.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ YrResident, }
+                                   \AttributeTok{y =}\NormalTok{ Place\_Attachment\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-15-8.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Age, }\AttributeTok{y =}\NormalTok{ Place\_Attachment\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-15-9.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Multi{-}collinearity tests}
+\FunctionTok{cor.test}\NormalTok{(settlement\_data2}\SpecialCharTok{$}\NormalTok{Household\_Marine\_Tenure,}
+\NormalTok{         settlement\_data2}\SpecialCharTok{$}\NormalTok{Food\_Security\_Index)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data2$Household_Marine_Tenure and settlement_data2$Food_Security_Index
+## t = -5.8, df = 409, p-value = 1.329e-08
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.3627357 -0.1838526
+## sample estimates:
+##        cor 
+## -0.2756793
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor.test}\NormalTok{(settlement\_data2}\SpecialCharTok{$}\NormalTok{Household\_Marine\_Tenure,}
+\NormalTok{         settlement\_data2}\SpecialCharTok{$}\NormalTok{YrResident)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data2$Household_Marine_Tenure and settlement_data2$YrResident
+## t = 2.036, df = 409, p-value = 0.04239
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.003473309 0.195008737
+## sample estimates:
+##       cor 
+## 0.1001689
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor.test}\NormalTok{(settlement\_data2}\SpecialCharTok{$}\NormalTok{Household\_Marine\_Tenure,}
+\NormalTok{         settlement\_data2}\SpecialCharTok{$}\NormalTok{Age)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data2$Household_Marine_Tenure and settlement_data2$Age
+## t = -3.0222, df = 409, p-value = 0.002667
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.24107960 -0.05180823
+## sample estimates:
+##        cor 
+## -0.1477969
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor.test}\NormalTok{(settlement\_data2}\SpecialCharTok{$}\NormalTok{Food\_Security\_Index,}
+\NormalTok{         settlement\_data2}\SpecialCharTok{$}\NormalTok{YrResident)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data2$Food_Security_Index and settlement_data2$YrResident
+## t = 1.5794, df = 409, p-value = 0.115
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.0190111  0.1732856
+## sample estimates:
+##        cor 
+## 0.07786137
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor.test}\NormalTok{(settlement\_data2}\SpecialCharTok{$}\NormalTok{Food\_Security\_Index,}
+\NormalTok{         settlement\_data2}\SpecialCharTok{$}\NormalTok{Age)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data2$Food_Security_Index and settlement_data2$Age
+## t = 5.4314, df = 409, p-value = 9.616e-08
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.1668286 0.3473861
+## sample estimates:
+##       cor 
+## 0.2593723
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor.test}\NormalTok{(settlement\_data2}\SpecialCharTok{$}\NormalTok{YrResident,}
+\NormalTok{         settlement\_data2}\SpecialCharTok{$}\NormalTok{Age)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data2$YrResident and settlement_data2$Age
+## t = 9.553, df = 409, p-value < 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.3446207 0.5030580
+## sample estimates:
+##       cor 
+## 0.4271122
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fit linear regression model without random effect and evaluate model}
+\CommentTok{\# diagnostics}
+\NormalTok{place\_attachment\_lm }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Place\_Attachment\_Index }\SpecialCharTok{\textasciitilde{}} 
+\NormalTok{                            Household\_Marine\_Tenure }\SpecialCharTok{+}
+\NormalTok{                            Food\_Security\_Index }\SpecialCharTok{+}
+\NormalTok{                            YrResident }\SpecialCharTok{+}
+\NormalTok{                            Age, }\AttributeTok{data =}\NormalTok{ settlement\_data2)}
+
+\FunctionTok{summary}\NormalTok{(place\_attachment\_lm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Place_Attachment_Index ~ Household_Marine_Tenure + 
+##     Food_Security_Index + YrResident + Age, data = settlement_data2)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.57484 -0.11324 -0.00842  0.08892  0.96095 
+## 
+## Coefficients:
+##                          Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)              3.719496   0.132809  28.006  < 2e-16 ***
+## Household_Marine_Tenure  0.051603   0.017048   3.027  0.00263 ** 
+## Food_Security_Index     -0.012266   0.018334  -0.669  0.50383    
+## YrResident               0.001102   0.001356   0.813  0.41664    
+## Age                      0.004051   0.002806   1.443  0.14969    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.2074 on 406 degrees of freedom
+## Multiple R-squared:  0.03631,    Adjusted R-squared:  0.02682 
+## F-statistic: 3.825 on 4 and 406 DF,  p-value: 0.00459
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(place\_attachment\_lm)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-15-10.pdf}
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-15-11.pdf}
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-15-12.pdf}
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-15-13.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# AIC Value of standard linear model}
+\FunctionTok{AIC}\NormalTok{(place\_attachment\_lm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -119.5846
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fit linear regression model with random effect and evaluate model}
+\CommentTok{\# diagnostics}
+
+\CommentTok{\# Re{-}fit standard linear regression}
+\NormalTok{place\_attachment\_lm2 }\OtherTok{\textless{}{-}} \FunctionTok{gls}\NormalTok{(Place\_Attachment\_Index }\SpecialCharTok{\textasciitilde{}} 
+\NormalTok{                            Household\_Marine\_Tenure }\SpecialCharTok{+}
+\NormalTok{                            Food\_Security\_Index }\SpecialCharTok{+}
+\NormalTok{                            YrResident }\SpecialCharTok{+}
+\NormalTok{                            Age, }\AttributeTok{data =}\NormalTok{ settlement\_data2)}
+\CommentTok{\# Fit multi{-}level model with MPA name as random effect}
+\NormalTok{place\_attachment\_rlm }\OtherTok{\textless{}{-}} \FunctionTok{lme}\NormalTok{(Place\_Attachment\_Index }\SpecialCharTok{\textasciitilde{}} 
+\NormalTok{                            Household\_Marine\_Tenure }\SpecialCharTok{+}
+\NormalTok{                            Food\_Security\_Index }\SpecialCharTok{+}
+\NormalTok{                            YrResident }\SpecialCharTok{+}
+\NormalTok{                            Age, }\AttributeTok{random =} \SpecialCharTok{\textasciitilde{}} \DecValTok{1} \SpecialCharTok{|}\NormalTok{ MPAName, }\AttributeTok{data =}\NormalTok{ settlement\_data2, }
+                            \AttributeTok{na.action=}\NormalTok{na.exclude)}
+
+\CommentTok{\# Compare AIC Values}
+\FunctionTok{AIC}\NormalTok{(place\_attachment\_lm2, place\_attachment\_rlm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in AIC.default(place_attachment_lm2, place_attachment_rlm): models are
+## not all fitted to the same number of observations
+\end{verbatim}
+
+\begin{verbatim}
+##                      df       AIC
+## place_attachment_lm2  6 -78.09284
+## place_attachment_rlm  7 -52.20510
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Plot residuals of multi{-}level model}
+\FunctionTok{plot}\NormalTok{(place\_attachment\_rlm)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-15-14.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{qqnorm}\NormalTok{(place\_attachment\_rlm)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-15-15.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Model summary}
+\FunctionTok{summary}\NormalTok{(place\_attachment\_rlm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear mixed-effects model fit by REML
+##   Data: settlement_data2 
+##        AIC       BIC   logLik
+##   -52.2051 -24.73531 33.10255
+## 
+## Random effects:
+##  Formula: ~1 | MPAName
+##         (Intercept)  Residual
+## StdDev:  0.05852237 0.2094833
+## 
+## Fixed effects:  Place_Attachment_Index ~ Household_Marine_Tenure + Food_Security_Index +      YrResident + Age 
+##                             Value  Std.Error  DF   t-value p-value
+## (Intercept)              3.771316 0.15066850 370 25.030557  0.0000
+## Household_Marine_Tenure  0.036404 0.02025540 370  1.797269  0.0731
+## Food_Security_Index     -0.016311 0.01978587 370 -0.824391  0.4102
+## YrResident               0.002316 0.00151550 370  1.528322  0.1273
+## Age                      0.003297 0.00300653 370  1.096582  0.2735
+##  Correlation: 
+##                         (Intr) Hs_M_T Fd_S_I YrRsdn
+## Household_Marine_Tenure -0.556                     
+## Food_Security_Index     -0.378  0.264              
+## YrResident               0.139 -0.134  0.015       
+## Age                     -0.737  0.174 -0.181 -0.439
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -2.61399176 -0.63189980 -0.05838216  0.45724255  4.20992865 
+## 
+## Number of Observations: 379
+## Number of Groups: 5
+\end{verbatim}
+
+\section{Logistic Regression Model
+(Sameer)}\label{logistic-regression-model-sameer}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Sameer\textquotesingle{}s Logistics Regression Model for determining Place Attachment}
+
+\CommentTok{\#Research Question: Do socioeconomic indicators (Household Material Assets, Household Marine Tenure, Food Security Index and School Enrollment Rate predict binary place attachment to MPAs (Attached/Not Attached)?)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Possible relationships between covariates and response variable}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Household\_Material\_Assets, }
+                                    \AttributeTok{y =}\NormalTok{ Place\_Attachment\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Household\_Marine\_Tenure, }
+                                    \AttributeTok{y =}\NormalTok{ Place\_Attachment\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-17-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Food\_Security\_Index, }
+                                   \AttributeTok{y =}\NormalTok{ Place\_Attachment\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-17-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ School\_Enrollment\_Rate, }
+                                   \AttributeTok{y =}\NormalTok{ Place\_Attachment\_Index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-17-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Only School Enrollment Rate shows some relationship with PLace Attachment {-} slightly higher density of points with a \textgreater{}4.0 place attachment when School Enrollment Rate increases. All other variables show a random distribution of points with respect to Place Attachment}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Look at correlation between covariates and response variable}
+\FunctionTok{cor.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Place\_Attachment\_Index, settlement\_data}\SpecialCharTok{$}\NormalTok{Household\_Material\_Assets)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data$Place_Attachment_Index and settlement_data$Household_Material_Assets
+## t = -1.2861, df = 409, p-value = 0.1991
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.15921755  0.03346906
+## sample estimates:
+##        cor 
+## -0.0634657
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# {-}0.06}
+\FunctionTok{cor.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Place\_Attachment\_Index, settlement\_data}\SpecialCharTok{$}\NormalTok{Household\_Marine\_Tenure)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data$Place_Attachment_Index and settlement_data$Household_Marine_Tenure
+## t = 3.2469, df = 409, p-value = 0.001263
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.06275387 0.25139540
+## sample estimates:
+##       cor 
+## 0.1585209
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 0.159}
+\FunctionTok{cor.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Place\_Attachment\_Index, settlement\_data}\SpecialCharTok{$}\NormalTok{School\_Enrollment\_Rate)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data$Place_Attachment_Index and settlement_data$School_Enrollment_Rate
+## t = -2.7473, df = 409, p-value = 0.006275
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.22836305 -0.03837756
+## sample estimates:
+##        cor 
+## -0.1346072
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# {-}0.135}
+\FunctionTok{cor.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Place\_Attachment\_Index, settlement\_data}\SpecialCharTok{$}\NormalTok{Food\_Security\_Index)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data$Place_Attachment_Index and settlement_data$Food_Security_Index
+## t = -1.0821, df = 409, p-value = 0.2798
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.14938718  0.04352427
+## sample estimates:
+##         cor 
+## -0.05342996
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# {-}0.053}
+
+\CommentTok{\# Multi{-}collinearity tests}
+\FunctionTok{cor.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Household\_Material\_Assets, settlement\_data}\SpecialCharTok{$}\NormalTok{Household\_Marine\_Tenure)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data$Household_Material_Assets and settlement_data$Household_Marine_Tenure
+## t = -1.2265, df = 409, p-value = 0.2207
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.1563505  0.0364057
+## sample estimates:
+##         cor 
+## -0.06053677
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# correlation of the two variable is statistically non{-}significant, p{-}value = 0.221, cor = {-}0.06}
+\FunctionTok{cor.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Household\_Material\_Assets, settlement\_data}\SpecialCharTok{$}\NormalTok{School\_Enrollment\_Rate)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data$Household_Material_Assets and settlement_data$School_Enrollment_Rate
+## t = 4.1855, df = 409, p-value = 3.486e-05
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.1080535 0.2936375
+## sample estimates:
+##       cor 
+## 0.2026645
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# correlation of the two variable is statistically significant, p{-}value = 3.49e{-}05, cor = 0.203}
+\FunctionTok{cor.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Household\_Material\_Assets, settlement\_data}\SpecialCharTok{$}\NormalTok{Food\_Security\_Index)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data$Household_Material_Assets and settlement_data$Food_Security_Index
+## t = 3.5123, df = 409, p-value = 0.0004938
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.0756311 0.2634770
+## sample estimates:
+##       cor 
+## 0.1711086
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# correlation of the two variable is statistically significant, p{-}value = 0.0005, cor = 0.171}
+\FunctionTok{cor.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Household\_Marine\_Tenure, settlement\_data}\SpecialCharTok{$}\NormalTok{School\_Enrollment\_Rate)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data$Household_Marine_Tenure and settlement_data$School_Enrollment_Rate
+## t = -3.3954, df = 409, p-value = 0.0007523
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.25816849 -0.06996526
+## sample estimates:
+##       cor 
+## -0.165574
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# correlation of the two variable is statistically significant, p{-}value = 0.0008, cor = {-}0.166}
+\FunctionTok{cor.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Household\_Marine\_Tenure, settlement\_data}\SpecialCharTok{$}\NormalTok{Food\_Security\_Index)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data$Household_Marine_Tenure and settlement_data$Food_Security_Index
+## t = -5.8, df = 409, p-value = 1.329e-08
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.3627357 -0.1838526
+## sample estimates:
+##        cor 
+## -0.2756793
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# correlation of the two variable is statistically significant, p{-}value = 1.33e{-}08, cor = {-}0.276}
+\FunctionTok{cor.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Food\_Security\_Index, settlement\_data}\SpecialCharTok{$}\NormalTok{School\_Enrollment\_Rate)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data$Food_Security_Index and settlement_data$School_Enrollment_Rate
+## t = 2.6431, df = 409, p-value = 0.008531
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.03327849 0.22351807
+## sample estimates:
+##       cor 
+## 0.1295906
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# correlation of the two variable is statistically significant, p{-}value = 0.009, cor = 0.130}
+
+\CommentTok{\#Statistical significance of correlations between multiple covariate pairs. However, all the correlations are weak (under 0.3) so we proceed with using all the covariates}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Define a function for Rice\textquotesingle{}s Rule}
+\NormalTok{rice\_rule }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(n) \{}
+  \FunctionTok{return}\NormalTok{(}\DecValTok{2} \SpecialCharTok{*}\NormalTok{ (n}\SpecialCharTok{\^{}}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{3}\NormalTok{)))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{num\_bins }\OtherTok{\textless{}{-}} \FunctionTok{ceiling}\NormalTok{(}\FunctionTok{rice\_rule}\NormalTok{(}\FunctionTok{length}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Place\_Attachment\_Index)))}
+
+\CommentTok{\#Look at distribution of place attachment values}
+\FunctionTok{ggplot}\NormalTok{(settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Place\_Attachment\_Index)) }\SpecialCharTok{+}
+      \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =}\NormalTok{ num\_bins) }\SpecialCharTok{+}
+      \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Place Attachment"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Frequency"}\NormalTok{, }\AttributeTok{title =} \StringTok{"Distribution of Place Attachment values amongst Eastern Indonesian communities"}\NormalTok{) }\SpecialCharTok{+}
+      \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-20-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Distribution is approximately normal with a slight right{-}skew}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mean\_PIA }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Place\_Attachment\_Index)}
+
+\CommentTok{\#As an initial pass, convert Place\_Attachment\_Index into a binary categorical variable where values below mean are 0 and values above mean are 1. This categorization can be further explored and tweaked}
+\NormalTok{settlement\_data }\OtherTok{\textless{}{-}}\NormalTok{ settlement\_data }\SpecialCharTok{\%\textgreater{}\%} 
+                    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{PIA\_Binary =} \FunctionTok{ifelse}\NormalTok{(Place\_Attachment\_Index }\SpecialCharTok{\textgreater{}}\NormalTok{ mean\_PIA, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Build first logistic regression model with PIA\_Binary as response variable}
+\NormalTok{PIA\_glm }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(PIA\_Binary }\SpecialCharTok{\textasciitilde{}}\NormalTok{  Household\_Material\_Assets }\SpecialCharTok{+}\NormalTok{ Household\_Marine\_Tenure }\SpecialCharTok{+}\NormalTok{ Food\_Security\_Index }\SpecialCharTok{+}\NormalTok{ School\_Enrollment\_Rate, }\AttributeTok{data =}\NormalTok{ settlement\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Communicate Results}
+\CommentTok{\# The results of our logistic regression reveal that Household Material Assets is a significant predictor (p \textless{} 0.05) of the binary place attachment variable.}
+\CommentTok{\# AIC: 595.94}
+
+\CommentTok{\# household material assets p = 0.035}
+\CommentTok{\# household marine tenure p = 0.224}
+\CommentTok{\#food security index p = 0.123}
+\CommentTok{\# school enrollment rate p  = 0.507}
+
+\CommentTok{\#As an initial pass, Household Material Assets is a significant predictor (p \textless{} 0.05) of PIA\_Binary}
+\CommentTok{\#Interesting as Household Material Assets did not show a strong correlation with overall Place Attachment but could be due to binary PIA values.}
+\FunctionTok{summary}\NormalTok{(PIA\_glm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = PIA_Binary ~ Household_Material_Assets + Household_Marine_Tenure + 
+##     Food_Security_Index + School_Enrollment_Rate, data = settlement_data)
+## 
+## Coefficients:
+##                           Estimate Std. Error t value Pr(>|t|)  
+## (Intercept)                0.46552    0.26301   1.770   0.0775 .
+## Household_Material_Assets -0.52772    0.24952  -2.115   0.0350 *
+## Household_Marine_Tenure    0.04904    0.04030   1.217   0.2243  
+## Food_Security_Index        0.06689    0.04324   1.547   0.1227  
+## School_Enrollment_Rate    -0.13420    0.20218  -0.664   0.5072  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.2454008)
+## 
+##     Null deviance: 101.625  on 410  degrees of freedom
+## Residual deviance:  99.633  on 406  degrees of freedom
+## AIC: 595.94
+## 
+## Number of Fisher Scoring iterations: 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#No significant outliers from Cook\textquotesingle{}s distance plot}
+\CommentTok{\#Normal Q{-}Q plot shows residuals do not follow a normal distribution with very heavy tails on lower and upper end}
+\CommentTok{\#Residuals also do not show a random distribution and homoscedasticity}
+\CommentTok{\#Given the AIC value and the residual plots, we will not proceed with this model}
+\FunctionTok{plot}\NormalTok{(PIA\_glm)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-24-1.pdf}
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-24-2.pdf}
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-24-3.pdf}
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-24-4.pdf}
+
+\section{Multi-level model with household variables
+(Sameer)}\label{multi-level-model-with-household-variables-sameer}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Research Question: Do socioeconomic indicators (Household Material Assets, Household Marine Tenure, Food Security Index and School Enrollment Rate predict place attachment to MPAs, when accounting for individual variation of place attachment within MPAs?}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fit multi{-}level model with random intercept by MPA as a sensitivity analysis}
+\NormalTok{place\_attachment\_household\_mlm }\OtherTok{\textless{}{-}} \FunctionTok{lme}\NormalTok{(Place\_Attachment\_Index }\SpecialCharTok{\textasciitilde{}} 
+\NormalTok{                            Household\_Marine\_Tenure }\SpecialCharTok{+}
+\NormalTok{                            Household\_Material\_Assets }\SpecialCharTok{+}
+\NormalTok{                            School\_Enrollment\_Rate }\SpecialCharTok{+}
+\NormalTok{                            Food\_Security\_Index, }\AttributeTok{random =} \SpecialCharTok{\textasciitilde{}} \DecValTok{1} \SpecialCharTok{|}\NormalTok{ MPAName, }\AttributeTok{data =}\NormalTok{ settlement\_data2, }\AttributeTok{na.action =}\NormalTok{ na.exclude)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(place\_attachment\_household\_mlm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear mixed-effects model fit by REML
+##   Data: settlement_data2 
+##         AIC      BIC   logLik
+##   -68.69349 -41.2237 41.34674
+## 
+## Random effects:
+##  Formula: ~1 | MPAName
+##         (Intercept)  Residual
+## StdDev:   0.0589693 0.2092381
+## 
+## Fixed effects:  Place_Attachment_Index ~ Household_Marine_Tenure + Household_Material_Assets +      School_Enrollment_Rate + Food_Security_Index 
+##                               Value  Std.Error  DF  t-value p-value
+## (Intercept)                4.198641 0.13190308 370 31.83125  0.0000
+## Household_Marine_Tenure    0.024336 0.02037826 370  1.19422  0.2332
+## Household_Material_Assets -0.136370 0.11518354 370 -1.18394  0.2372
+## School_Enrollment_Rate    -0.194838 0.09097394 370 -2.14169  0.0329
+## Food_Security_Index       -0.004839 0.01945609 370 -0.24871  0.8037
+##  Correlation: 
+##                           (Intr) Hs_M_T Hs_M_A Sc_E_R
+## Household_Marine_Tenure   -0.644                     
+## Household_Material_Assets -0.368  0.158              
+## School_Enrollment_Rate    -0.499  0.121 -0.169       
+## Food_Security_Index       -0.553  0.276 -0.041 -0.066
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -2.82829277 -0.66655643 -0.04793978  0.47614800  4.20203149 
+## 
+## Number of Observations: 379
+## Number of Groups: 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Communicate Results}
+\CommentTok{\# The results of our multi{-}level regression reveal that School Enrollment Rate is a significant predictor (p \textless{} 0.05) of place attachment}
+\CommentTok{\# AIC: {-}68.69}
+\CommentTok{\#This checks out with our observations of the scatterplots}
+
+\CommentTok{\# household material assets p = 0.237}
+\CommentTok{\# household marine tenure p = 0.233}
+\CommentTok{\#food security index p = 0.804}
+\CommentTok{\# school enrollment rate p  = 0.033}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Residuals show mostly homoscedasticity }
+\FunctionTok{plot}\NormalTok{(place\_attachment\_household\_mlm)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-28-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Residuals do not meet normality assumption {-} heavier tails on both ends}
+\FunctionTok{qqnorm}\NormalTok{(place\_attachment\_household\_mlm)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-28-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Compare AIC Values with logistic regression model {-} lower AIC value for multi{-}level model}
+\CommentTok{\#Better residual plots and lower AIC value means we choose multi{-}level model over logistic regression model}
+\FunctionTok{AIC}\NormalTok{(PIA\_glm, place\_attachment\_household\_mlm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in AIC.default(PIA_glm, place_attachment_household_mlm): models are not
+## all fitted to the same number of observations
+\end{verbatim}
+
+\begin{verbatim}
+##                                df       AIC
+## PIA_glm                         6 595.93828
+## place_attachment_household_mlm  7 -68.69349
+\end{verbatim}
+
+\section{Linear Regression Model
+(Kayla)}\label{linear-regression-model-kayla}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Define Research Question:}
+\CommentTok{\# Is there a relationship between place attachment index and household material assets, }
+\CommentTok{\# household marine tenure, and school enrollment rate?}
+
+\CommentTok{\# Examine data and possible correlations}
+\CommentTok{\# Raw Counts}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \StringTok{\textasciigrave{}}\AttributeTok{Place\_Attachment\_Index}\StringTok{\textasciigrave{}}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{15}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-29-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# pretty normally distributed }
+
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \StringTok{\textasciigrave{}}\AttributeTok{Household\_Material\_Assets}\StringTok{\textasciigrave{}}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{15}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-29-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# pretty normally distributed }
+
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \StringTok{\textasciigrave{}}\AttributeTok{Household\_Marine\_Tenure}\StringTok{\textasciigrave{}}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{15}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-29-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# not normally distributed}
+
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \StringTok{\textasciigrave{}}\AttributeTok{School\_Enrollment\_Rate}\StringTok{\textasciigrave{}}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{15}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-29-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# pretty skewed}
+
+\CommentTok{\# Possible Correlations}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \StringTok{\textasciigrave{}}\AttributeTok{Household\_Material\_Assets}\StringTok{\textasciigrave{}}\NormalTok{, }\AttributeTok{y =} \StringTok{\textasciigrave{}}\AttributeTok{Place\_Attachment\_Index}\StringTok{\textasciigrave{}}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-29-5.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \StringTok{\textasciigrave{}}\AttributeTok{Household\_Marine\_Tenure}\StringTok{\textasciigrave{}}\NormalTok{, }\AttributeTok{y =} \StringTok{\textasciigrave{}}\AttributeTok{Place\_Attachment\_Index}\StringTok{\textasciigrave{}}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-29-6.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ settlement\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \StringTok{\textasciigrave{}}\AttributeTok{School\_Enrollment\_Rate}\StringTok{\textasciigrave{}}\NormalTok{, }\AttributeTok{y =} \StringTok{\textasciigrave{}}\AttributeTok{Place\_Attachment\_Index}\StringTok{\textasciigrave{}}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-29-7.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#unclear if any of those have any sort of correlation}
+
+\CommentTok{\# Numerically view correlation }
+\FunctionTok{cor.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Place\_Attachment\_Index, settlement\_data}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Household\_Material\_Assets}\StringTok{\textasciigrave{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data$Place_Attachment_Index and settlement_data$Household_Material_Assets
+## t = -1.2861, df = 409, p-value = 0.1991
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.15921755  0.03346906
+## sample estimates:
+##        cor 
+## -0.0634657
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# very low.... {-}0.06}
+\FunctionTok{cor.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Place\_Attachment\_Index, settlement\_data}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Household\_Marine\_Tenure}\StringTok{\textasciigrave{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data$Place_Attachment_Index and settlement_data$Household_Marine_Tenure
+## t = 3.2469, df = 409, p-value = 0.001263
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.06275387 0.25139540
+## sample estimates:
+##       cor 
+## 0.1585209
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# slightly better .. 0.158}
+\FunctionTok{cor.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\NormalTok{Place\_Attachment\_Index, settlement\_data}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{School\_Enrollment\_Rate}\StringTok{\textasciigrave{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data$Place_Attachment_Index and settlement_data$School_Enrollment_Rate
+## t = -2.7473, df = 409, p-value = 0.006275
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.22836305 -0.03837756
+## sample estimates:
+##        cor 
+## -0.1346072
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# still low ... {-}0.135}
+
+\CommentTok{\# Multi{-}collinearity tests}
+\FunctionTok{cor.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Household\_Material\_Assets}\StringTok{\textasciigrave{}}\NormalTok{, settlement\_data}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Household\_Marine\_Tenure}\StringTok{\textasciigrave{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data$Household_Material_Assets and settlement_data$Household_Marine_Tenure
+## t = -1.2265, df = 409, p-value = 0.2207
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.1563505  0.0364057
+## sample estimates:
+##         cor 
+## -0.06053677
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# pass}
+\FunctionTok{cor.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Household\_Material\_Assets}\StringTok{\textasciigrave{}}\NormalTok{, settlement\_data}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{School\_Enrollment\_Rate}\StringTok{\textasciigrave{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data$Household_Material_Assets and settlement_data$School_Enrollment_Rate
+## t = 4.1855, df = 409, p-value = 3.486e-05
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.1080535 0.2936375
+## sample estimates:
+##       cor 
+## 0.2026645
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# pass}
+\FunctionTok{cor.test}\NormalTok{(settlement\_data}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Household\_Marine\_Tenure}\StringTok{\textasciigrave{}}\NormalTok{, settlement\_data}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{School\_Enrollment\_Rate}\StringTok{\textasciigrave{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  settlement_data$Household_Marine_Tenure and settlement_data$School_Enrollment_Rate
+## t = -3.3954, df = 409, p-value = 0.0007523
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.25816849 -0.06996526
+## sample estimates:
+##       cor 
+## -0.165574
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# pass }
+
+\CommentTok{\# ok so no strong correlations, not worried about co{-}linearity either }
+\CommentTok{\# try to fit model and see what happens }
+
+\CommentTok{\# Fit regression model}
+\NormalTok{Indonesia\_household\_model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Place\_Attachment\_Index }\SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{Household\_Material\_Assets}\StringTok{\textasciigrave{}} \SpecialCharTok{+}
+                                   \StringTok{\textasciigrave{}}\AttributeTok{Household\_Marine\_Tenure}\StringTok{\textasciigrave{}} \SpecialCharTok{+} \StringTok{\textasciigrave{}}\AttributeTok{School\_Enrollment\_Rate}\StringTok{\textasciigrave{}}\NormalTok{, }
+                                \AttributeTok{data =}\NormalTok{ settlement\_data)}
+
+\FunctionTok{summary}\NormalTok{(Indonesia\_household\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Place_Attachment_Index ~ Household_Material_Assets + 
+##     Household_Marine_Tenure + School_Enrollment_Rate, data = settlement_data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.63066 -0.12002 -0.00832  0.09008  0.94731 
+## 
+## Coefficients:
+##                           Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)                4.08103    0.09169  44.509  < 2e-16 ***
+## Household_Material_Assets -0.07023    0.10312  -0.681  0.49622    
+## Household_Marine_Tenure    0.04589    0.01626   2.822  0.00501 ** 
+## School_Enrollment_Rate    -0.17568    0.08433  -2.083  0.03784 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.207 on 407 degrees of freedom
+## Multiple R-squared:  0.0383, Adjusted R-squared:  0.03121 
+## F-statistic: 5.403 on 3 and 407 DF,  p-value: 0.001182
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Evaluate Model Diagnostics}
+\FunctionTok{plot}\NormalTok{(Indonesia\_household\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-29-8.pdf}
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-29-9.pdf}
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-29-10.pdf}
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-29-11.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# plots look fine, no outliers }
+
+\CommentTok{\# Communicate Results}
+\CommentTok{\# The results of our multiple linear regression reveal that household marine tenure, }
+\CommentTok{\# and school enrollment rate are significant predictors of place attachment in }
+\CommentTok{\# Indonesia (F(407) = 5.403, adjusted R\^{}2 = 0.03121, p = 0.0012). }
+
+\CommentTok{\# household material assets t = 0.496}
+\CommentTok{\# household marine tenure t = 0.005 **}
+\CommentTok{\# school enrollment rate t  = 0.0378 *}
+
+
+\CommentTok{\# This model is weak, let\textquotesingle{}s see what it looks like without household material assets}
+\CommentTok{\# Fit regression model}
+\NormalTok{Indonesia\_household\_model2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Place\_Attachment\_Index }\SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{Household\_Marine\_Tenure}\StringTok{\textasciigrave{}}
+                                 \SpecialCharTok{+} \StringTok{\textasciigrave{}}\AttributeTok{School\_Enrollment\_Rate}\StringTok{\textasciigrave{}}\NormalTok{, }
+                                \AttributeTok{data =}\NormalTok{ settlement\_data)}
+
+\FunctionTok{summary}\NormalTok{(Indonesia\_household\_model2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Place_Attachment_Index ~ Household_Marine_Tenure + 
+##     School_Enrollment_Rate, data = settlement_data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.63033 -0.12315 -0.00653  0.09096  0.93604 
+## 
+## Coefficients:
+##                         Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)              4.05556    0.08366  48.477  < 2e-16 ***
+## Household_Marine_Tenure  0.04620    0.01625   2.844  0.00468 ** 
+## School_Enrollment_Rate  -0.18692    0.08264  -2.262  0.02423 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.2068 on 408 degrees of freedom
+## Multiple R-squared:  0.0372, Adjusted R-squared:  0.03248 
+## F-statistic: 7.882 on 2 and 408 DF,  p-value: 0.0004377
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# AIC Value}
+\FunctionTok{AIC}\NormalTok{(Indonesia\_household\_model2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -123.964
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Evaluate Model Diagnostics}
+\FunctionTok{plot}\NormalTok{(Indonesia\_household\_model2)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-29-12.pdf}
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-29-13.pdf}
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-29-14.pdf}
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-29-15.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# plots look fine}
+
+\CommentTok{\# The results of our multiple linear regression reveal that household marine tenure, }
+\CommentTok{\# and school enrollment rate are significant predictors of place attachment in }
+\CommentTok{\# Indonesia (F(408) = 7.882, adjusted R\^{}2 = 0.03248, p = 0.0004). }
+\CommentTok{\# household marine tenure t = 0.00468 **}
+\CommentTok{\# school enrollment rate t  = 0.0242 *}
+
+\CommentTok{\# better, but not sure what this tells us. maybe we try a multilevel model. }
+\end{Highlighting}
+\end{Shaded}
+
+\section{Mixed Effects Model - Kayla}\label{mixed-effects-model---kayla}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Trying a mixed effects model with different predictor variables. A mix of individual and }
+\CommentTok{\# household variables to try and build a more significant model. }
+\CommentTok{\# Try a multilevel/mixed effects model using vars we know have a correlation}
+\CommentTok{\# with place attachment }
+
+\CommentTok{\# Fit multi{-}level model with random intercept by plot}
+\NormalTok{place\_attachment\_mem }\OtherTok{\textless{}{-}} \FunctionTok{lme}\NormalTok{(Place\_Attachment\_Index }\SpecialCharTok{\textasciitilde{}} 
+\NormalTok{                            School\_Enrollment\_Rate }\SpecialCharTok{+}
+\NormalTok{                              Household\_Marine\_Tenure }\SpecialCharTok{+}
+\NormalTok{                              YrResident, }
+                            \AttributeTok{random =} \SpecialCharTok{\textasciitilde{}} \DecValTok{1} \SpecialCharTok{|}\NormalTok{ MPAName, }\AttributeTok{data =}\NormalTok{ settlement\_data2, }
+                            \AttributeTok{na.action=}\NormalTok{na.exclude)}
+
+\CommentTok{\# Compare AIC Values between all mixed effect models so far}
+\FunctionTok{AIC}\NormalTok{(place\_attachment\_mem, place\_attachment\_rlm, place\_attachment\_household\_mlm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in AIC.default(place_attachment_mem, place_attachment_rlm,
+## place_attachment_household_mlm): models are not all fitted to the same number
+## of observations
+\end{verbatim}
+
+\begin{verbatim}
+##                                df       AIC
+## place_attachment_mem            6 -72.75938
+## place_attachment_rlm            7 -52.20510
+## place_attachment_household_mlm  7 -68.69349
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# mlm has the lowest AIC, with the mem having second lowest}
+
+\CommentTok{\# Plot residuals of multi{-}level model}
+\FunctionTok{plot}\NormalTok{(place\_attachment\_mem)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-30-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{qqnorm}\NormalTok{(place\_attachment\_mem)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Indonesian_MPA_Analysis_files/figure-latex/unnamed-chunk-30-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Model summary}
+\FunctionTok{summary}\NormalTok{(place\_attachment\_mem)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear mixed-effects model fit by REML
+##   Data: settlement_data2 
+##         AIC       BIC   logLik
+##   -72.75938 -49.19782 42.37969
+## 
+## Random effects:
+##  Formula: ~1 | MPAName
+##         (Intercept)  Residual
+## StdDev:  0.06266477 0.2074717
+## 
+## Fixed effects:  Place_Attachment_Index ~ School_Enrollment_Rate + Household_Marine_Tenure +      YrResident 
+##                             Value  Std.Error  DF  t-value p-value
+## (Intercept)              4.052218 0.10060027 371 40.28039  0.0000
+## School_Enrollment_Rate  -0.243205 0.08936277 371 -2.72154  0.0068
+## Household_Marine_Tenure  0.025942 0.01921014 371  1.35042  0.1777
+## YrResident               0.003459 0.00135611 371  2.55101  0.0111
+##  Correlation: 
+##                         (Intr) Sc_E_R Hs_M_T
+## School_Enrollment_Rate  -0.760              
+## Household_Marine_Tenure -0.567  0.188       
+## YrResident              -0.268 -0.121 -0.067
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -2.85107406 -0.64953050 -0.03015959  0.48822683  4.14707607 
+## 
+## Number of Observations: 379
+## Number of Groups: 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Make table with AIC results }
+
+\CommentTok{\# Create a data frame with model names and AIC values}
+\NormalTok{aic\_model1 }\OtherTok{\textless{}{-}} \FunctionTok{AIC}\NormalTok{(place\_attachment\_rlm)}
+\NormalTok{aic\_model2 }\OtherTok{\textless{}{-}} \FunctionTok{AIC}\NormalTok{(place\_attachment\_household\_mlm)}
+\NormalTok{aic\_model3 }\OtherTok{\textless{}{-}} \FunctionTok{AIC}\NormalTok{(place\_attachment\_mem)}
+
+\NormalTok{aic\_table }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Model =} \FunctionTok{c}\NormalTok{(}\StringTok{"Mixed Effect Model to Determine Place Attachment Attempt 1"}\NormalTok{, }
+            \StringTok{"Mixed Effect Model to Determine Place Attachment Attempt 2"}\NormalTok{, }
+            \StringTok{"Mixed Effect Model to Determine Place Attachment Attempt 3"}\NormalTok{),}
+  \AttributeTok{AIC =} \FunctionTok{c}\NormalTok{(aic\_model1, }
+\NormalTok{          aic\_model2, }
+\NormalTok{          aic\_model3)}
+\NormalTok{)}
+
+\CommentTok{\# Print the table}
+\FunctionTok{print}\NormalTok{(aic\_table)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                                        Model       AIC
+## 1 Mixed Effect Model to Determine Place Attachment Attempt 1 -52.20510
+## 2 Mixed Effect Model to Determine Place Attachment Attempt 2 -68.69349
+## 3 Mixed Effect Model to Determine Place Attachment Attempt 3 -72.75938
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# make pretty using gt}
+\NormalTok{aic\_table\_gt }\OtherTok{\textless{}{-}}\NormalTok{ aic\_table }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gt}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tab\_header}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"AIC Comparison of Mixed{-}Effects Models"}
+\NormalTok{  )  }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{fmt\_number}\NormalTok{(}
+    \AttributeTok{columns =} \FunctionTok{vars}\NormalTok{(AIC),}
+    \AttributeTok{decimals =} \DecValTok{2}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{cols\_label}\NormalTok{(}
+    \AttributeTok{Model =} \StringTok{"Model"}\NormalTok{,}
+    \AttributeTok{AIC =} \StringTok{"AIC Value"}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tab\_spanner\_delim}\NormalTok{(}
+    \AttributeTok{delim =} \StringTok{" "}\NormalTok{,}
+    \AttributeTok{columns =} \FunctionTok{everything}\NormalTok{()}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Since gt v0.3.0, `columns = vars(...)` has been deprecated.
+## * Please use `columns = c(...)` instead.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Print the table}
+\NormalTok{aic\_table\_gt}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[!t]
+\caption*{
+{\large AIC Comparison of Mixed-Effects Models}
+} 
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lr}
+\toprule
+Model & AIC Value \\ 
+\midrule\addlinespace[2.5pt]
+Mixed Effect Model to Determine Place Attachment Attempt 1 & -52.21 \\ 
+Mixed Effect Model to Determine Place Attachment Attempt 2 & -68.69 \\ 
+Mixed Effect Model to Determine Place Attachment Attempt 3 & -72.76 \\ 
+\bottomrule
+\end{tabular*}
+\end{table}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# save the table }
+\FunctionTok{gtsave}\NormalTok{(aic\_table\_gt, }\StringTok{"aic\_table.png"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## file:////var/folders/1k/wfyvwjys5cs9vp3xc7rpf18h0000gn/T//Rtmpf88h6w/file185a422de008.html screenshot completed
+\end{verbatim}
+
+\section{Summary Statistics (Andrew)}\label{summary-statistics-andrew}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Summary Table}
+\NormalTok{indonesia\_summary }\OtherTok{\textless{}{-}}\NormalTok{ settlement\_data }\SpecialCharTok{\%\textgreater{}\%} 
+\FunctionTok{group\_by}\NormalTok{(MPAName) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{count =} \FunctionTok{n}\NormalTok{(),}
+            \AttributeTok{mean\_place\_attachment =} \FunctionTok{mean}\NormalTok{(Place\_Attachment\_Index,}
+                                               \AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+            \AttributeTok{median\_place\_attachment =} \FunctionTok{median}\NormalTok{(Place\_Attachment\_Index, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+            \AttributeTok{variance\_place\_attachment =} \FunctionTok{var}\NormalTok{(Place\_Attachment\_Index, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+            \AttributeTok{sd\_place\_attachment =} \FunctionTok{sd}\NormalTok{(Place\_Attachment\_Index, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{()}
+
+\CommentTok{\# Rename columns}
+\FunctionTok{colnames}\NormalTok{(indonesia\_summary) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"MPA Name"}\NormalTok{, }\StringTok{"Number of Observations"}\NormalTok{,}
+                                 \StringTok{"Mean Place Attachment"}\NormalTok{,}
+                                 \StringTok{"Median Place Attachment"}\NormalTok{,}
+                                 \StringTok{"Variance Place Attachment"}\NormalTok{,}
+                                 \StringTok{"SD Place Attachment"}\NormalTok{)}
+
+\CommentTok{\# Export Table}
+\FunctionTok{write.csv}\NormalTok{(indonesia\_summary, }\StringTok{"Indonesia\_Summary\_Statistics.csv"}\NormalTok{)}
+
+\NormalTok{indonesia\_gt }\OtherTok{\textless{}{-}}\NormalTok{ indonesia\_summary }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{gt}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{fmt\_number}\NormalTok{(}\AttributeTok{columns =} \FunctionTok{c}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Mean Place Attachment}\StringTok{\textasciigrave{}}\NormalTok{,}
+                         \StringTok{\textasciigrave{}}\AttributeTok{Median Place Attachment}\StringTok{\textasciigrave{}}\NormalTok{,}
+                         \StringTok{\textasciigrave{}}\AttributeTok{Variance Place Attachment}\StringTok{\textasciigrave{}}\NormalTok{,}
+                         \StringTok{\textasciigrave{}}\AttributeTok{SD Place Attachment}\StringTok{\textasciigrave{}}\NormalTok{),}
+             \AttributeTok{decimals =} \DecValTok{2}\NormalTok{)}
+
+\NormalTok{indonesia\_gt}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[!t]
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr}
+\toprule
+MPA Name & Number of Observations & Mean Place Attachment & Median Place Attachment & Variance Place Attachment & SD Place Attachment \\ 
+\midrule\addlinespace[2.5pt]
+Kaimana MPA & 65 & 3.96 & 3.96 & 0.03 & 0.17 \\ 
+Kofiau dan Pulau  Boo MPA & 32 & 4.04 & 4.03 & 0.01 & 0.10 \\ 
+Misool Selatan Timur MPA & 76 & 3.99 & 4.02 & 0.02 & 0.16 \\ 
+Selat Dampier MPA & 67 & 3.97 & 3.95 & 0.03 & 0.18 \\ 
+Teluk Cenderawasih NP & 119 & 4.02 & 4.02 & 0.03 & 0.18 \\ 
+Teluk Mayalibit MPA & 52 & 4.14 & 4.00 & 0.14 & 0.37 \\ 
+\bottomrule
+\end{tabular*}
+\end{table}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{gtsave}\NormalTok{(indonesia\_gt,}
+       \StringTok{"indonesia\_summary\_table.png"}\NormalTok{,}
+       \AttributeTok{path =} \FunctionTok{here}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## file:////var/folders/1k/wfyvwjys5cs9vp3xc7rpf18h0000gn/T//Rtmpf88h6w/file185a1a47f5b0.html screenshot completed
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create mean of other variables table}
+\NormalTok{indonesia\_mean\_summary }\OtherTok{\textless{}{-}}\NormalTok{ settlement\_data }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean\_household\_material\_assets =} \FunctionTok{mean}\NormalTok{(Household\_Material\_Assets,}
+                                                  \AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+            \AttributeTok{mean\_household\_marine\_tenure =} \FunctionTok{mean}\NormalTok{(Household\_Marine\_Tenure,}
+                                                \AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+            \AttributeTok{mean\_food\_security\_index =} \FunctionTok{mean}\NormalTok{(Food\_Security\_Index,}
+                                            \AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+            \AttributeTok{mean\_place\_attachment\_index =} \FunctionTok{mean}\NormalTok{(Place\_Attachment\_Index,}
+                                               \AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+            \AttributeTok{mean\_school\_enrollment\_rate =} \FunctionTok{mean}\NormalTok{(School\_Enrollment\_Rate,}
+                                               \AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+            \AttributeTok{mean\_years\_residency =} \FunctionTok{mean}\NormalTok{(YrResident, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+            \AttributeTok{mean\_household\_age =} \FunctionTok{mean}\NormalTok{(Age, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+            \AttributeTok{mean\_gender =} \FunctionTok{mean}\NormalTok{(Gender, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
+
+\CommentTok{\# Rename columns}
+\FunctionTok{colnames}\NormalTok{(indonesia\_mean\_summary) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Household Material Assets"}\NormalTok{,}
+                                      \StringTok{"Household Marine Tenure"}\NormalTok{,}
+                                      \StringTok{"Food Security Index"}\NormalTok{,}
+                                      \StringTok{"Place Attachment Index"}\NormalTok{,}
+                                      \StringTok{"School Enrollment Rate"}\NormalTok{,}
+                                      \StringTok{"Years of Residency"}\NormalTok{,}
+                                      \StringTok{"Age"}\NormalTok{,}
+                                      \StringTok{"Gender"}\NormalTok{)}
+
+\NormalTok{indonesia\_mean\_summary }\OtherTok{\textless{}{-}}\NormalTok{ indonesia\_mean\_summary }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \StringTok{\textasciigrave{}}\AttributeTok{Household Material Assets}\StringTok{\textasciigrave{}}\SpecialCharTok{:}\NormalTok{Gender,}
+               \AttributeTok{names\_to =} \StringTok{"Variable Name"}\NormalTok{,}
+               \AttributeTok{values\_to =} \StringTok{"Mean"}\NormalTok{)}
+
+\CommentTok{\# Export Table}
+\NormalTok{indonesia\_gt2 }\OtherTok{\textless{}{-}}\NormalTok{ indonesia\_mean\_summary }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{gt}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{fmt\_number}\NormalTok{(}\AttributeTok{columns =} \FunctionTok{c}\NormalTok{(Mean),}
+             \AttributeTok{decimals =} \DecValTok{2}\NormalTok{)}
+
+\NormalTok{indonesia\_gt2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[!t]
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lr}
+\toprule
+Variable Name & Mean \\ 
+\midrule\addlinespace[2.5pt]
+Household Material Assets & 0.48 \\ 
+Household Marine Tenure & 2.40 \\ 
+Food Security Index & 3.41 \\ 
+Place Attachment Index & 4.01 \\ 
+School Enrollment Rate & 0.81 \\ 
+Years of Residency & 29.06 \\ 
+Age & 44.69 \\ 
+Gender & 0.91 \\ 
+\bottomrule
+\end{tabular*}
+\end{table}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{gtsave}\NormalTok{(indonesia\_gt2,}
+       \StringTok{"indonesia\_mean\_summary\_table.png"}\NormalTok{,}
+       \AttributeTok{path =} \FunctionTok{here}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## file:////var/folders/1k/wfyvwjys5cs9vp3xc7rpf18h0000gn/T//Rtmpf88h6w/file185a6a53034a.html screenshot completed
+\end{verbatim}
+
+\end{document}

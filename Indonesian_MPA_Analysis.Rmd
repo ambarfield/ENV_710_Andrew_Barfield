@@ -1,8 +1,10 @@
 ---
-title: "Indonesia_MPA_Analysis"
+title: "Indonesia MPA Analysis"
 author: "Sameer, Andrew, Kayla"
-date: '2025-03-01'
-output: pdf_document
+date: "2025-03-01"
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
