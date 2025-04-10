@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Setup
 ```{r}
-#Importing libraries for Shiny dashboard and documentation
+#Importing libraries for analysis
 library(tidyverse)
 library(rlang)
 library(roxygen2)
@@ -25,7 +25,7 @@ library(gt)
 
 # Load and Clean Data (Sameer)
 ```{r}
-#Load dataset from an RDS file named "optdata.rds"
+#Load dataset on MPAs in Bird's Head Seascape Network
 settlement_data <- read_csv("Settlement_Data_with_updated_demographics.csv")
 
 head(settlement_data)
@@ -61,9 +61,9 @@ settlement_data <- na.omit(settlement_data)
 ```
 
 # Figure 1 (Kayla)
-```{r}
+```{r, fig.cap="A series of histograms depicting the distribution of place attachment within marine protected area (MPA) regions in Indonesia. Indices are scaled 1-5."}
 # Graph 1
-# visualize the distribution of the food security index observations by MPA 
+# visualize the distribution of the place attachment index observations by MPA 
 histogram_1 <- ggplot(settlement_data, aes(x = Place_Attachment_Index,
                                            fill = MPAName)) +
   geom_histogram(bins = 8) +  # follow rice's rule to get 6ish
