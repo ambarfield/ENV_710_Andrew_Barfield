@@ -655,40 +655,40 @@ ggplot(data = settlement_data2, aes(x = `Household_Marine_Tenure`)) +
   theme_bw()
 # not normally distributed
 
-ggplot(data = settlement_data, aes(x = `School Enrollment Rate`)) +
+ggplot(data = settlement_data, aes(x = `School_Enrollment_Rate`)) +
   geom_histogram(bins = 15) +
   theme_bw()
 # pretty skewed
 
 # Possible Correlations
-ggplot(data = settlement_data, aes(x = `Household Material Assets`, y = `Place_Attachment_Index`)) +
+ggplot(data = settlement_data, aes(x = `Household_Material_Assets`, y = `Place_Attachment_Index`)) +
   geom_point() +
   theme_bw()
 
-ggplot(data = settlement_data, aes(x = `Household Marine Tenure`, y = `Place_Attachment_Index`)) +
+ggplot(data = settlement_data, aes(x = `Household_Marine_Tenure`, y = `Place_Attachment_Index`)) +
   geom_point() +
   theme_bw()
 
-ggplot(data = settlement_data, aes(x = `School Enrollment Rate`, y = `Place_Attachment_Index`)) +
+ggplot(data = settlement_data, aes(x = `School_Enrollment_Rate`, y = `Place_Attachment_Index`)) +
   geom_point() +
   theme_bw()
 
 #unclear if any of those have any sort of correlation
 
 # Numerically view correlation 
-cor.test(settlement_data$Place_Attachment_Index, settlement_data$`Household Material Assets`)
+cor.test(settlement_data$Place_Attachment_Index, settlement_data$`Household_Material_Assets`)
 # very low.... -0.06
-cor.test(settlement_data$Place_Attachment_Index, settlement_data$`Household Marine Tenure`)
+cor.test(settlement_data$Place_Attachment_Index, settlement_data$`Household_Marine_Tenure`)
 # slightly better .. 0.158
-cor.test(settlement_data$Place_Attachment_Index, settlement_data$`School Enrollment Rate`)
+cor.test(settlement_data$Place_Attachment_Index, settlement_data$`School_Enrollment_Rate`)
 # still low ... -0.135
 
 # Multi-collinearity tests
-cor.test(settlement_data$`Household Material Assets`, settlement_data$`Household Marine Tenure`)
+cor.test(settlement_data$`Household_Material_Assets`, settlement_data$`Household_Marine_Tenure`)
 # pass
-cor.test(settlement_data$`Household Material Assets`, settlement_data$`School Enrollment Rate`)
+cor.test(settlement_data$`Household_Material_Assets`, settlement_data$`School_Enrollment_Rate`)
 # pass
-cor.test(settlement_data$`Household Marine Tenure`, settlement_data$`School Enrollment Rate`)
+cor.test(settlement_data$`Household_Marine_Tenure`, settlement_data$`School_Enrollment_Rate`)
 # pass 
 
 # ok so no strong correlations, not worried about co-linearity either 
